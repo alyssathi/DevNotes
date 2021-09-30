@@ -1,9 +1,18 @@
 import React from "react";
+import { Accordion, ArticleCard, ArticleList, ArticleTable, MarkdownInput, Modals, Layout } from "../../components";
 
 export function Landing() {
 	return (
-		<div>
-			<h1>Landing</h1>
-		</div>
+		<Layout>
+			<div>
+				Components
+				<Accordion />
+				<ArticleCard />
+				<ArticleList />
+				<ArticleTable />
+				<MarkdownInput />
+				<Modals />
+			</div>
+		</Layout>
 	);
 }
