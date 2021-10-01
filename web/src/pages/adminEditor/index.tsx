@@ -1,9 +1,15 @@
 import React from "react";
+import { Layout, MarkdownInput } from "../../components";
+import { useStyles } from "./adminEditorCss";
 
 export function AdminEditor() {
+	const css = useStyles();
 	return (
-		<div>
-			<h1>Landing</h1>
-		</div>
+		<Layout>
+			<div className={css.container}>
+				<h1>Editor</h1>
+				<MarkdownInput />
+			</div>
+		</Layout>
 	);
 }

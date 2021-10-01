@@ -8,4 +8,4 @@ drop:
 
 .PHONY: dirtyV1
 dirtyV1:
-	./bin/migrate -path ./server/migrations -database 'postgres://dev:dev@localhost:5432/devnotes?sslmode=disable' force 20210819102435
+	./bin/migrate -path ./server/migrations -database 'postgres://dev:dev@localhost:5432/devnotes?sslmode=disable' force 20211001164239

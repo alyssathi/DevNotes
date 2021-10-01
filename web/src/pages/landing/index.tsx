@@ -1,5 +1,5 @@
 import React from "react";
-import { Accordion, ArticleCard, ArticleList, ArticleTable, MarkdownInput, Modals, Layout } from "../../components";
+import { Accordion, ArticleCard, ArticleList, ArticleTable, Layout } from "../../components";
 
 export function Landing() {
 	return (
@@ -10,8 +10,6 @@ export function Landing() {
 				<ArticleCard />
 				<ArticleList />
 				<ArticleTable />
-				<MarkdownInput />
-				<Modals />
 			</div>
 		</Layout>
 	);

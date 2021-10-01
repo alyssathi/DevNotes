@@ -14,10 +14,7 @@ function Header(): JSX.Element {
 					<Typography variant="h3">DevNotes</Typography>
 				</div>
 				<div>
-					<Button onClick={() => history.push("/playPanel")} variant="contained" className={css.button}>
-						Playground
-					</Button>
-					<Button variant="outlined" className={css.button}>
+					<Button onClick={() => history.push("/adminLogin")} variant="outlined" className={css.button}>
 						Admin
 					</Button>
 				</div>

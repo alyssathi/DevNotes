@@ -14,3 +14,5 @@ CREATE TABLE IF NOT EXISTS articles(
     body TEXT NOT NULL,
     category TEXT NOT NULL
 );
+
+INSERT INTO users (name, username, password_hash) VALUES ('dev', 'dev', 'dev');
