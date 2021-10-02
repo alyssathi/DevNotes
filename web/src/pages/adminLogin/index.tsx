@@ -22,7 +22,7 @@ export function AdminLogin() {
 					<Typography variant="h2">Login, Gorgeous!</Typography>
 					<TextField fullWidth label="Username" />
 					<TextField fullWidth label="Password" />
-					<Button variant="contained" fullWidth type="submit">
+					<Button variant="contained" color="secondary" fullWidth type="submit">
 						Submit
 					</Button>
 				</form>
