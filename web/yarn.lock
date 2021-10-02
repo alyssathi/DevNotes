@@ -1271,6 +1271,16 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/abeezee@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/abeezee/-/abeezee-4.5.0.tgz#d3c430e494f0be1545b2cb28ec10114b42433e6c"
+  integrity sha512-uh/NSOXYG/f88D1Tgqsei6hH4mFVqt6ZWwRkreg+mR/i9U31HYrMe9XOiz9Ko0I/DTXrD/+Y3txk9ykNH/yFZQ==
+
+"@fontsource/aleo@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/aleo/-/aleo-4.5.0.tgz#56ae6bf4901ba0b5628b1ff5b1072d00281a7b23"
+  integrity sha512-ieGYpiEzeRTBg7RJWDaZobScoNziaE2abHm7WTmHIfkFT+EwINDW5SJDEVX6MU6E1I+2B5WlVyQwaFA9YwM4nA==
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.npmjs.org/@hapi/address/-/address-2.1.4.tgz"

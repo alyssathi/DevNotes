@@ -1,4 +1,6 @@
 import { createTheme } from "@mui/material";
+import "@fontsource/abeezee";
+import "@fontsource/aleo";
 
 export const theme = createTheme({
 	palette: {
@@ -9,5 +11,25 @@ export const theme = createTheme({
 			main: "#e6beae",
 		},
 	},
-	typography: {},
+	typography: {
+		fontFamily: "Aleo",
+		h1: {
+			fontFamily: "ABeeZee",
+		},
+		h2: {
+			fontFamily: "ABeeZee",
+		},
+		h3: {
+			fontFamily: "ABeeZee",
+		},
+		h4: {
+			fontFamily: "ABeeZee",
+		},
+		h5: {
+			fontFamily: "ABeeZee",
+		},
+		h6: {
+			fontFamily: "ABeeZee",
+		},
+	},
 });
