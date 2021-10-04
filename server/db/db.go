@@ -39,3 +39,21 @@ func (db *DB) GetUserByUsername(username string) (*devNotes.User, error) {
 	}
 	return dbUser, nil
 }
+
+func (db *DB) GetArticles(isPublished bool) (*devNotes.Article, error) {
+	//getting articles based on if it is published or not
+	return nil, nil
+}
+
+func (db *DB) GetArticleByID(id string) (*devNotes.Article, error) {
+	//getting article based on id
+	return nil, nil
+}
+
+func (db *DB) SaveArticleDraft() {
+	//setting isPublished to False
+}
+
+func (db *DB) PublishArticle() {
+	//setting isPublished to True
+}

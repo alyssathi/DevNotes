@@ -19,7 +19,9 @@ export function AdminLogin() {
 
 				<form onSubmit={handleLogin} className={css.form}>
 					<Typography variant="subtitle1">But if you are Alyssa...</Typography>
-					<Typography variant="h2">Login, Gorgeous!</Typography>
+					<Typography variant="h2" color="primary">
+						Login, Gorgeous!
+					</Typography>
 					<TextField fullWidth label="Username" />
 					<TextField fullWidth label="Password" />
 					<Button variant="contained" color="secondary" fullWidth type="submit">

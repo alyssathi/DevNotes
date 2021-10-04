@@ -14,8 +14,11 @@ export function MarkdownInput() {
 				inputProps={{ style: { textAlign: "center", fontSize: "1.5rem", fontWeight: "bolder" } }}
 			/>
 			<TextField multiline minRows="30" className={css.body} placeholder="The good stuff of your awesome new note!" />
-			<Fab sx={{ position: "fixed", bottom: "2.5rem", right: ".5rem" }} color="primary" variant="extended">
-				Publish
+			<Fab sx={{ position: "fixed", bottom: "3rem", right: ".5rem" }} color="secondary" variant="extended">
+				<b>Publish</b>
+			</Fab>
+			<Fab sx={{ position: "fixed", bottom: "3rem", right: "6.5rem" }} color="primary" variant="extended">
+				Save Draft
 			</Fab>
 		</div>
 	);
