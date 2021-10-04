@@ -10,5 +10,6 @@ What's more _dev_ than developing your own blog-like site from scratch so you ca
 
 ## Stack:
 
-Typescript, Go, PostgreSQL,
-[React to Markdown library](https://github.com/remarkjs/react-markdown)
+React, Typescript, Go, PostgreSQL
+
+[React to Markdown library](https://github.com/remarkjs/react-markdown), [Self-hosted fonts](https://fontsource.org/fonts/aleo)

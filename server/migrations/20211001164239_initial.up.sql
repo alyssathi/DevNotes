@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS articles(
     date_created TIMESTAMP NOT NULL,
     date_edited TIMESTAMP,
     body TEXT NOT NULL,
-    category TEXT NOT NULL
+    category TEXT NOT NULL,
+    is_published BOOLEAN NOT NULL
 );
 
 INSERT INTO users (name, username, password_hash) VALUES ('dev', 'dev', 'dev');
