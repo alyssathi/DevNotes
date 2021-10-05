@@ -1,13 +1,31 @@
 import { Button, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useRef } from "react";
 import { Layout } from "../../components";
 import { useStyles } from "./adminLoginCss";
 
 export function AdminLogin() {
 	const css = useStyles();
+	const usernameRef = useRef<HTMLInputElement>();
+	const passwordRef = useRef<HTMLInputElement>();
 	async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		console.log("login");
+		try {
+			const response = await fetch("/api/login_user", {
+				method: "POST",
+				headers: { "content-type": "application/json" },
+				body: JSON.stringify({
+					username: usernameRef?.current?.value,
+					password: passwordRef?.current?.value,
+				}),
+			});
+
+			const data = await response.json();
+			if (data) {
+				console.log("yay");
+			}
+		} catch (err) {
+			console.log(err);
+		}
 	}
 	return (
 		<Layout>
@@ -22,8 +40,8 @@ export function AdminLogin() {
 					<Typography variant="h2" color="primary">
 						Login, Gorgeous!
 					</Typography>
-					<TextField fullWidth label="Username" />
-					<TextField fullWidth label="Password" />
+					<TextField fullWidth label="Username" inputRef={usernameRef} />
+					<TextField fullWidth label="Password" inputRef={passwordRef} />
 					<Button variant="contained" color="secondary" fullWidth type="submit">
 						Submit
 					</Button>
