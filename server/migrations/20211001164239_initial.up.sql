@@ -19,7 +19,6 @@ CREATE TABLE IF NOT EXISTS articles (
     id uuid NOT NULL DEFAULT uuid_generate_v4 (),
     title text NOT NULL,
     date_created timestamp NOT NULL,
-    date_edited timestamp,
     body text NOT NULL,
     category text NOT NULL,
     is_published boolean NOT NULL

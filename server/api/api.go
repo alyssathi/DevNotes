@@ -33,6 +33,7 @@ func New(db *db.DB) (*Controller, error) {
 	c := &Controller{db, sessionManager, r}
 
 	r.HandleFunc("/api/login_user", c.LoginUser)
+	r.HandleFunc("/api/save-article", c.SaveArticle)
 
 	return c, nil
 }
@@ -64,12 +65,27 @@ func (c *Controller) LoginUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(http.StatusOK)
 }
 
-func (c *Controller) PublishArticle(w http.ResponseWriter, r *http.Request) {
-	//saving to articles db and setting true to is_published
-}
+func (c *Controller) SaveArticle(w http.ResponseWriter, r *http.Request) {
+	//saving to articles db
+	a := &devNotes.Article{}
 
-func (c *Controller) SaveDraft(w http.ResponseWriter, r *http.Request) {
-	//saving to articles db and setting false to is_published
+	err := json.NewDecoder(r.Body).Decode(a)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		fmt.Println(err)
+		return
+	}
+	a.Date_created = time.Now()
+
+	fmt.Println(a)
+	err = c.DB.SaveArticleToDB(a.Title, a.Body, a.Category, a.Date_created, a.Is_published)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		fmt.Println(err)
+		return
+	}
+
+	json.NewEncoder(w).Encode(http.StatusOK)
 }
 
 func (c *Controller) GetArticles(w http.ResponseWriter, r *http.Request) {
