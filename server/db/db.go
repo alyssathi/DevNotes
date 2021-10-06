@@ -31,7 +31,7 @@ func New(conn *pgxpool.Pool) (*DB, error) {
 
 func (db *DB) GetUserByUsername(username string) (*devNotes.User, error) {
 	query := `
-		SELECT id, name, username, password FROM users WHERE username = $1`
+		SELECT id, name, username, password_hash FROM users WHERE username = $1`
 	dbUser := &devNotes.User{}
 	err := db.Conn.QueryRow(context.Background(), query, username).Scan(&dbUser.Id, &dbUser.Name, &dbUser.Username, &dbUser.Password)
 	if err != nil {

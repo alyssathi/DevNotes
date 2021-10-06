@@ -1,5 +1,6 @@
 import { Button, TextField, Typography } from "@mui/material";
 import React, { useRef } from "react";
+import { useHistory } from "react-router";
 import { Layout } from "../../components";
 import { useStyles } from "./adminLoginCss";
 
@@ -7,6 +8,7 @@ export function AdminLogin() {
 	const css = useStyles();
 	const usernameRef = useRef<HTMLInputElement>();
 	const passwordRef = useRef<HTMLInputElement>();
+	const history = useHistory();
 	async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		try {
@@ -20,8 +22,8 @@ export function AdminLogin() {
 			});
 
 			const data = await response.json();
-			if (data) {
-				console.log("yay");
+			if (data === 200) {
+				history.push("/adminPanel");
 			}
 		} catch (err) {
 			console.log(err);

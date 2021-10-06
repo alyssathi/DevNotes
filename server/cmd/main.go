@@ -48,7 +48,7 @@ func main() {
 					&cli.StringFlag{
 						Name:    "name",
 						Aliases: []string{"n"},
-						Value:   "studynook",
+						Value:   "devnotes",
 						Usage:   "Set the database name in the database connection string"},
 				},
 				Action: func(c *cli.Context) error {

@@ -3,13 +3,13 @@ package api
 import (
 	"devNotes"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"time"
 
 	"github.com/alexedwards/scs/pgxstore"
 	"github.com/alexedwards/scs/v2"
 	"github.com/go-chi/chi/v5"
-	"golang.org/x/crypto/bcrypt"
 
 	"devNotes/db"
 )
@@ -48,11 +48,11 @@ func (c *Controller) LoginUser(w http.ResponseWriter, r *http.Request) {
 	dbUser, err := c.DB.GetUserByUsername(u.Username)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
+		fmt.Println(err)
 		return
 	}
-
-	err = bcrypt.CompareHashAndPassword([]byte(dbUser.Password), []byte(u.Password))
-	if err != nil {
+	//this will have to be changed to hashed for production
+	if u.Password != dbUser.Password {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
