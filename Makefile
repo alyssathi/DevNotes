@@ -12,4 +12,8 @@ dirtyV1:
 
 .PHONY: seed
 seed:
-	cd server/cmd && go run main.go s -d true
+	cd server/cmd && go run main.go s -d true	
+
+.PHONY: serve
+serve:
+	cd server/cmd && go run main.go s
