@@ -4,6 +4,7 @@ package main
 import (
 	"devNotes/api"
 	"devNotes/db"
+	"devNotes/seed"
 	"fmt"
 	"log"
 	"net/http"
@@ -50,6 +51,11 @@ func main() {
 						Aliases: []string{"n"},
 						Value:   "devnotes",
 						Usage:   "Set the database name in the database connection string"},
+					&cli.BoolFlag{
+						Name:    "seed",
+						Aliases: []string{"d"},
+						Value:   false,
+						Usage:   "Sets if you want to seed the database"},
 				},
 				Action: func(c *cli.Context) error {
 					address := c.String("address")
@@ -57,6 +63,7 @@ func main() {
 					password := c.String("password")
 					connection := c.String("connection")
 					name := c.String("name")
+					seedBool := c.Bool("seed")
 
 					//initializing the database connection
 					conn, err := db.Connect(user, password, connection, name)
@@ -70,6 +77,20 @@ func main() {
 						fmt.Println(err)
 						return err
 					}
+
+					if seedBool {
+						seeder, err := seed.New(database)
+						if err != nil {
+							fmt.Println(err)
+							return err
+						}
+						err = seed.Run(seeder)
+						if err != nil {
+							fmt.Println(err)
+							return err
+						}
+					}
+
 					//passing in the database and emailer to the controller so they are available to the API package
 					controller, err := api.New(database)
 					if err != nil {
@@ -79,6 +100,7 @@ func main() {
 					//starting the server
 					log.Fatal(http.ListenAndServe(address, controller.Sessions.LoadAndSave(controller.Router)))
 					if err != nil {
+						fmt.Println(err)
 						return err
 					}
 					return nil

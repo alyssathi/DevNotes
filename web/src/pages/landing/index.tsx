@@ -1,12 +1,12 @@
 import React from "react";
-import { Accordion, ArticleCard, ArticleList, ArticleTable, Layout } from "../../components";
+import { SimpleAccordion, ArticleCard, ArticleList, ArticleTable, Layout } from "../../components";
 
 export function Landing() {
 	return (
 		<Layout>
 			<div>
 				Components
-				<Accordion />
+				<SimpleAccordion />
 				<ArticleCard />
 				<ArticleList />
 				<ArticleTable />

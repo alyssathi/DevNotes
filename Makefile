@@ -9,3 +9,7 @@ drop:
 .PHONY: dirtyV1
 dirtyV1:
 	./bin/migrate -path ./server/migrations -database 'postgres://dev:dev@localhost:5432/devnotes?sslmode=disable' force 20211001164239
+
+.PHONY: seed
+seed:
+	cd server/cmd && go run main.go s -d true
