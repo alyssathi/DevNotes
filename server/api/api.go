@@ -32,13 +32,15 @@ func New(db *db.DB) (*Controller, error) {
 
 	c := &Controller{db, sessionManager, r}
 
+	//this middleware chaining took me way too long. WithError takes in a special type of handlerfunc that allows me to return an error for each of my handlers and it returns a regular handler function. This is how I'm able to chain WithError to WithUser that takes in sessions and a handler func. WithError accounts for the handlerfunc and I can just pass in my session manager
 	r.HandleFunc("/api/login_user", c.LoginUser)
-	r.HandleFunc("/api/save-article", c.SaveArticle)
+	r.HandleFunc("/api/save-article", WithUser(sessionManager, WithError(c.SaveArticle)))
 
 	return c, nil
 }
 
 func (c *Controller) LoginUser(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("hit login")
 	u := &devNotes.User{}
 	err := json.NewDecoder(r.Body).Decode(u)
 	if err != nil {
@@ -55,6 +57,7 @@ func (c *Controller) LoginUser(w http.ResponseWriter, r *http.Request) {
 	//this will have to be changed to hashed for production
 	if u.Password != dbUser.Password {
 		w.WriteHeader(http.StatusBadRequest)
+		fmt.Println("passwords do not match")
 		return
 	}
 
@@ -65,27 +68,23 @@ func (c *Controller) LoginUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(http.StatusOK)
 }
 
-func (c *Controller) SaveArticle(w http.ResponseWriter, r *http.Request) {
+func (c *Controller) SaveArticle(w http.ResponseWriter, r *http.Request) error {
 	//saving to articles db
 	a := &devNotes.Article{}
 
 	err := json.NewDecoder(r.Body).Decode(a)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Println(err)
-		return
+		return err
 	}
 	a.Date_created = time.Now()
 
 	fmt.Println(a)
 	err = c.DB.SaveArticleToDB(a.Title, a.Body, a.Category, a.Date_created, a.Is_published)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Println(err)
-		return
+		return err
 	}
-
 	json.NewEncoder(w).Encode(http.StatusOK)
+	return nil
 }
 
 func (c *Controller) GetArticles(w http.ResponseWriter, r *http.Request) {
