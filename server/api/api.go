@@ -3,6 +3,7 @@ package api
 import (
 	"devNotes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"time"
@@ -33,32 +34,31 @@ func New(db *db.DB) (*Controller, error) {
 	c := &Controller{db, sessionManager, r}
 
 	//this middleware chaining took me way too long. WithError takes in a special type of handlerfunc that allows me to return an error for each of my handlers and it returns a regular handler function. This is how I'm able to chain WithError to WithUser that takes in sessions and a handler func. WithError accounts for the handlerfunc and I can just pass in my session manager
-	r.HandleFunc("/api/login_user", c.LoginUser)
+	r.HandleFunc("/api/login_user", WithError(c.LoginUser))
 	r.HandleFunc("/api/save-article", WithUser(sessionManager, WithError(c.SaveArticle)))
+	r.HandleFunc("/api/get-articles", WithError(c.GetPublicArticles))
+	r.HandleFunc("/api/get-all-articles", WithError(c.GetAllArticles))
 
 	return c, nil
 }
 
-func (c *Controller) LoginUser(w http.ResponseWriter, r *http.Request) {
+func (c *Controller) LoginUser(w http.ResponseWriter, r *http.Request) error {
 	fmt.Println("hit login")
 	u := &devNotes.User{}
 	err := json.NewDecoder(r.Body).Decode(u)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		return
+		return err
 	}
 
 	dbUser, err := c.DB.GetUserByUsername(u.Username)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Println(err)
-		return
+		return err
 	}
 	//this will have to be changed to hashed for production
 	if u.Password != dbUser.Password {
 		w.WriteHeader(http.StatusBadRequest)
-		fmt.Println("passwords do not match")
-		return
+		err = errors.New("passwords do not match")
+		return err
 	}
 
 	c.Sessions.Put(r.Context(), "id", dbUser.Id)
@@ -66,6 +66,7 @@ func (c *Controller) LoginUser(w http.ResponseWriter, r *http.Request) {
 	c.Sessions.Put(r.Context(), "username", dbUser.Username)
 
 	json.NewEncoder(w).Encode(http.StatusOK)
+	return nil
 }
 
 func (c *Controller) SaveArticle(w http.ResponseWriter, r *http.Request) error {
@@ -87,6 +88,20 @@ func (c *Controller) SaveArticle(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
-func (c *Controller) GetArticles(w http.ResponseWriter, r *http.Request) {
-	//this will be used in the admin panel and the displaying to public- need a key to check where it is coming from. Admin will display both drafts and published articles and the public will only see the published.
+func (c *Controller) GetPublicArticles(w http.ResponseWriter, r *http.Request) error {
+	arr, err := c.DB.GetArticles(true)
+	if err != nil {
+		return err
+	}
+	json.NewEncoder(w).Encode(arr)
+	return nil
+}
+
+func (c *Controller) GetAllArticles(w http.ResponseWriter, r *http.Request) error {
+	arr, err := c.DB.GetArticles(false)
+	if err != nil {
+		return err
+	}
+	json.NewEncoder(w).Encode(arr)
+	return nil
 }

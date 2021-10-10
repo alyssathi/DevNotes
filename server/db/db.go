@@ -41,9 +41,27 @@ func (db *DB) GetUserByUsername(username string) (*devNotes.User, error) {
 	return dbUser, nil
 }
 
-func (db *DB) GetArticles(isPublished bool) (*devNotes.Article, error) {
+func (db *DB) GetArticles(isPublic bool) (interface{}, error) {
 	//getting articles based on if it is published or not
-	return nil, nil
+	var arr interface{}
+	if isPublic {
+		query := `
+		SELECT array_to_json(array_agg(row_to_json(articles))) FROM articles WHERE is_published = true;`
+
+		err := db.Conn.QueryRow(context.Background(), query).Scan(&arr)
+		if err != nil {
+			return nil, err
+		}
+	} else if !isPublic {
+		query := `
+		SELECT array_to_json(array_agg(row_to_json(articles))) FROM articles;`
+
+		err := db.Conn.QueryRow(context.Background(), query).Scan(&arr)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return arr, nil
 }
 
 func (db *DB) GetArticleByID(id string) (*devNotes.Article, error) {
