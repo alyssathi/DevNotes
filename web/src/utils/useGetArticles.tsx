@@ -14,7 +14,7 @@ export function usePublicArticles() {
 					method: "GET",
 					headers: { "content-type": "application/json" },
 				});
-				const data: IArticle = await response.json();
+				const data: IArticle[] = await response.json();
 				if (isMounted) {
 					setPublicArticles(data);
 				}
@@ -41,7 +41,7 @@ export function useAllArticles() {
 					method: "GET",
 					headers: { "content-type": "application/json" },
 				});
-				const data: IArticle = await response.json();
+				const data: IArticle[] = await response.json();
 				if (isMounted) {
 					setAllArticles(data);
 				}

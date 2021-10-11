@@ -12,23 +12,9 @@ export interface IArticle {
 }
 
 function ContextDataContainer() {
-	const [publicArticles, setPublicArticles] = useState<IArticle>({
-		id: null,
-		title: null,
-		date_created: null,
-		body: null,
-		category: null,
-		is_published: null,
-	});
+	const [publicArticles, setPublicArticles] = useState<IArticle[]>([]);
 
-	const [allArticles, setAllArticles] = useState<IArticle>({
-		id: null,
-		title: null,
-		date_created: null,
-		body: null,
-		category: null,
-		is_published: null,
-	});
+	const [allArticles, setAllArticles] = useState<IArticle[]>([]);
 
 	return {
 		publicArticles,

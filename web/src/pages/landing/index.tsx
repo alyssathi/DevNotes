@@ -1,5 +1,5 @@
 import React from "react";
-import { SimpleAccordion, ArticleCard, ArticleList, ArticleTable, Layout } from "../../components";
+import { ArticleCard, ArticleList, Layout, SimpleAccordion } from "../../components";
 import { usePublicArticles } from "../../utils/useGetArticles";
 
 export function Landing() {
@@ -11,7 +11,6 @@ export function Landing() {
 				<SimpleAccordion />
 				<ArticleCard />
 				<ArticleList />
-				<ArticleTable />
 			</div>
 		</Layout>
 	);

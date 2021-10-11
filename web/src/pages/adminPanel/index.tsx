@@ -1,15 +1,16 @@
+import { Box, Typography } from "@mui/material";
 import React from "react";
-import { useAllArticles } from "../../utils/useGetArticles";
-import { ContextContainer } from "../../utils/contextContainer";
+import { sx } from "./adminPanelCss";
+
+import { ArticleTable, Layout } from "../../components";
 
 export function AdminPanel() {
-	useAllArticles();
-
-	const { allArticles } = ContextContainer.useContainer();
-	console.log("all", allArticles);
 	return (
-		<div>
-			<h1>Admin Panel</h1>
-		</div>
+		<Layout>
+			<Box sx={sx.container}>
+				<Typography variant="h3">Admin Panel</Typography>
+				<ArticleTable />
+			</Box>
+		</Layout>
 	);
 }
