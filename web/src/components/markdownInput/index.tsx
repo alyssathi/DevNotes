@@ -4,6 +4,7 @@ import { ContextContainer } from "../../utils/contextContainer";
 import { useGetCategories } from "../../utils/useGetCategories";
 import { useStyles } from "./markdownInputCss";
 import AddIcon from "@mui/icons-material/Add";
+import { useHistory } from "react-router";
 
 export function MarkdownInput() {
 	useGetCategories();
@@ -13,22 +14,28 @@ export function MarkdownInput() {
 	const bodyRef = useRef<HTMLInputElement>();
 	const [isPublished, setIsPublished] = useState<boolean>(false);
 	const [category, setCategory] = useState<string>("");
+	const history = useHistory();
 
 	async function handleSaveArticle(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+
+		if (titleRef?.current?.value.trim() === "" || bodyRef?.current?.value.trim() === "") return;
+
 		try {
 			const response = await fetch("/api/save-article", {
 				method: "POST",
 				headers: { "content-type": "application/json" },
 				body: JSON.stringify({
-					title: titleRef?.current?.value,
+					title: titleRef?.current?.value.trim(),
 					category: category,
-					body: bodyRef?.current?.value,
+					body: bodyRef?.current?.value.trim(),
 					isPublished: isPublished,
 				}),
 			});
 			const data = await response.json();
-			console.log(data);
+			if (data === 200) {
+				history.push("/adminPanel");
+			}
 		} catch (err) {
 			console.log(err);
 		}
@@ -37,6 +44,7 @@ export function MarkdownInput() {
 	return (
 		<form onSubmit={handleSaveArticle} className={css.container}>
 			<TextField
+				required
 				inputRef={titleRef}
 				placeholder="Title"
 				InputProps={{
@@ -48,6 +56,7 @@ export function MarkdownInput() {
 				<FormControl>
 					<InputLabel id="category-select-label">Category</InputLabel>
 					<Select
+						required
 						autoWidth
 						sx={{ minWidth: 120 }}
 						labelId="category-select-label"
@@ -67,7 +76,7 @@ export function MarkdownInput() {
 					<AddIcon />
 				</IconButton>
 			</Box>
-			<TextField inputRef={bodyRef} multiline minRows="30" className={css.body} placeholder="The good stuff of your awesome new note!" />
+			<TextField required inputRef={bodyRef} multiline minRows="30" className={css.body} placeholder="The good stuff of your awesome new note!" />
 			<Fab sx={{ position: "fixed", bottom: "3rem", right: ".5rem" }} color="secondary" variant="extended" type="submit" onClick={() => setIsPublished(true)}>
 				<b>Publish</b>
 			</Fab>

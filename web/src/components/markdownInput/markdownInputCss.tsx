@@ -17,5 +17,6 @@ export const useStyles = makeStyles({
 	category: {
 		display: "flex",
 		alignItems: "center",
+		marginBottom: "1rem",
 	},
 });
