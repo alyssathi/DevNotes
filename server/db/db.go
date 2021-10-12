@@ -70,13 +70,24 @@ func (db *DB) GetArticleByID(id string) (*devNotes.Article, error) {
 }
 
 func (db *DB) SaveArticleToDB(title, body, category string, date_created time.Time, is_published bool) error {
-	fmt.Println("hit db")
 	query := `
 		INSERT INTO articles (title, body, category, date_created, is_published) VALUES ($1, $2, $3, $4, $5)`
 	_, err := db.Conn.Exec(context.Background(), query, title, body, category, date_created, is_published)
 	if err != nil {
 		return err
 	}
-	fmt.Println("fin db")
 	return nil
+}
+
+func (db *DB) GetCategories() ([]string, error) {
+	var arr []string
+	query := `
+		SELECT ARRAY(SELECT * FROM categories);`
+	err := db.Conn.QueryRow(context.Background(), query).Scan(&arr)
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Println(arr)
+	return arr, nil
 }

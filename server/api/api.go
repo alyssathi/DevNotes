@@ -38,6 +38,7 @@ func New(db *db.DB) (*Controller, error) {
 	r.HandleFunc("/api/save-article", WithUser(sessionManager, WithError(c.SaveArticle)))
 	r.HandleFunc("/api/get-articles", WithError(c.GetPublicArticles))
 	r.HandleFunc("/api/get-all-articles", WithError(c.GetAllArticles))
+	r.HandleFunc("/api/get-categories", WithError(c.GetCategories))
 
 	return c, nil
 }
@@ -99,6 +100,15 @@ func (c *Controller) GetPublicArticles(w http.ResponseWriter, r *http.Request) e
 
 func (c *Controller) GetAllArticles(w http.ResponseWriter, r *http.Request) error {
 	arr, err := c.DB.GetArticles(false)
+	if err != nil {
+		return err
+	}
+	json.NewEncoder(w).Encode(arr)
+	return nil
+}
+
+func (c *Controller) GetCategories(w http.ResponseWriter, r *http.Request) error {
+	arr, err := c.DB.GetCategories()
 	if err != nil {
 		return err
 	}

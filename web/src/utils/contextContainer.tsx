@@ -13,14 +13,16 @@ export interface IArticle {
 
 function ContextDataContainer() {
 	const [publicArticles, setPublicArticles] = useState<IArticle[]>([]);
-
 	const [allArticles, setAllArticles] = useState<IArticle[]>([]);
+	const [categories, setCategories] = useState<[]>([]);
 
 	return {
 		publicArticles,
 		setPublicArticles,
 		allArticles,
 		setAllArticles,
+		categories,
+		setCategories,
 	};
 }
 

@@ -1,16 +1,16 @@
 import React from "react";
-import { ArticleCard, ArticleList, Layout, SimpleAccordion } from "../../components";
+import { ArticleCard, Layout, SimpleAccordion } from "../../components";
 import { usePublicArticles } from "../../utils/useGetArticles";
+import { useGetCategories } from "../../utils/useGetCategories";
 
 export function Landing() {
 	usePublicArticles();
+	useGetCategories();
 	return (
 		<Layout>
 			<div>
-				Components
 				<SimpleAccordion />
 				<ArticleCard />
-				<ArticleList />
 			</div>
 		</Layout>
 	);
