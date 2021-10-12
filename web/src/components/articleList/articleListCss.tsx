@@ -6,8 +6,8 @@ interface ISX {
 
 export const sx: ISX = {
 	container: {
-		"&:hover": {
-			cursor: "pointer",
-		},
+		display: "flex",
+		flexWrap: "wrap",
+		justifyContent: "space-around",
 	},
 };

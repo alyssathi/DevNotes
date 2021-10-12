@@ -12,7 +12,7 @@ export function ArticleTable() {
 	useAllArticles();
 
 	const { allArticles } = ContextContainer.useContainer();
-	console.log("all", allArticles);
+	if (allArticles === null) return null;
 	return (
 		<TableContainer sx={sx.container}>
 			<Table aria-label="simple table">

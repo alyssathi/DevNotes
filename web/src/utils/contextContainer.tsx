@@ -8,13 +8,15 @@ export interface IArticle {
 	date_created: string | null;
 	body: string | null;
 	category: string | null;
-	is_published: boolean | null;
+	is_published?: boolean | null;
 }
+
+export type categorytype = string | null;
 
 function ContextDataContainer() {
 	const [publicArticles, setPublicArticles] = useState<IArticle[]>([]);
 	const [allArticles, setAllArticles] = useState<IArticle[]>([]);
-	const [categories, setCategories] = useState<[]>([]);
+	const [categories, setCategories] = useState<categorytype[]>([]);
 
 	return {
 		publicArticles,

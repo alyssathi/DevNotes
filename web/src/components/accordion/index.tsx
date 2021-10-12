@@ -4,8 +4,9 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { ContextContainer } from "../../utils/contextContainer";
+import { categorytype, ContextContainer } from "../../utils/contextContainer";
 import { ArticleList } from "..";
+import { sx } from "./accordionCss";
 
 //we want to fetch our unique categories from the db and display those names as our accordion summary with the use of a map function and in the accordion details we will map through each of the articles and display those cards. The default view will be open
 
@@ -20,10 +21,10 @@ export function SimpleAccordion() {
 					<>
 						<Accordion defaultExpanded>
 							<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-								<Typography>{category}</Typography>
+								<Typography variant="h5">{category}</Typography>
 							</AccordionSummary>
-							<AccordionDetails>
-								<ArticleList />
+							<AccordionDetails sx={sx.container}>
+								<ArticleList category={category} />
 							</AccordionDetails>
 						</Accordion>
 					</>
