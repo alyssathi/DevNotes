@@ -10,7 +10,8 @@ export const sx: ISX = {
 		"&:hover": {
 			cursor: "pointer",
 		},
-		maxHeight: "150px",
+		minHeight: "200px",
+		minWidth: "325px",
 		maxWidth: "300px",
 		margin: ".5rem",
 	},

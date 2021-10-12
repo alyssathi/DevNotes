@@ -4,7 +4,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { categorytype, ContextContainer } from "../../utils/contextContainer";
+import { ContextContainer } from "../../utils/contextContainer";
 import { ArticleList } from "..";
 import { sx } from "./accordionCss";
 
@@ -20,7 +20,7 @@ export function SimpleAccordion() {
 				return (
 					<>
 						<Accordion defaultExpanded>
-							<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+							<AccordionSummary sx={sx.summary} expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
 								<Typography variant="h5">{category}</Typography>
 							</AccordionSummary>
 							<AccordionDetails sx={sx.container}>

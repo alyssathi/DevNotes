@@ -46,11 +46,11 @@ export function ArticleTable() {
 								{article.is_published ? <CheckCircleOutlineIcon color="success" /> : <CancelIcon color="error" />}
 							</TableCell>
 							<TableCell sx={i % 2 === 0 ? sx.even : sx.odd} align="right">
-								<IconButton color="error">
-									<DeleteIcon />
-								</IconButton>
 								<IconButton color="primary">
 									<EditIcon />
+								</IconButton>
+								<IconButton color="error">
+									<DeleteIcon />
 								</IconButton>
 							</TableCell>
 						</TableRow>

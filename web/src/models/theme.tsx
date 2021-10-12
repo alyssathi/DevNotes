@@ -5,10 +5,10 @@ import "@fontsource/aleo";
 export const theme = createTheme({
 	palette: {
 		primary: {
-			main: "#546a7b",
+			main: "#74a08b",
 		},
 		secondary: {
-			main: "#E5CEDC",
+			main: "#FDF0D5",
 		},
 	},
 	typography: {

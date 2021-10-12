@@ -14,4 +14,8 @@ export const useStyles = makeStyles({
 	body: {
 		width: "100%",
 	},
+	category: {
+		display: "flex",
+		alignItems: "center",
+	},
 });
