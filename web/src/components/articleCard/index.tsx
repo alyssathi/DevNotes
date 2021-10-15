@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import { IArticle } from "../../utils/contextContainer";
 import { sx } from "./articleCardCss";
 
-export function ArticleCard({ title, body, id, date_created, category }: IArticle): JSX.Element {
+export function ArticleCard({ title, body, id, description, date_created, category }: IArticle): JSX.Element {
 	const history = useHistory();
 	async function handleCardClick() {
 		history.push(`/article?id=${id}`);
@@ -17,7 +17,7 @@ export function ArticleCard({ title, body, id, date_created, category }: IArticl
 					{category}: {title}
 				</Typography>
 				<Typography variant="subtitle1" sx={sx.body}>
-					{body}
+					{description}
 				</Typography>
 			</CardContent>
 		</Card>

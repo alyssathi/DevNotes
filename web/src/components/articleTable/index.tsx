@@ -3,7 +3,6 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import React from "react";
 import { ContextContainer } from "../../utils/contextContainer";
 import { useAllArticles } from "../../utils/useGetArticles";

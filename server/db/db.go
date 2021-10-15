@@ -74,10 +74,10 @@ func (db *DB) GetArticleByID(id string) (*devNotes.Article, error) {
 	return dbArticle, nil
 }
 
-func (db *DB) SaveArticleToDB(title, body, category, date_created string, is_published bool) error {
+func (db *DB) SaveArticleToDB(title, body, category, date_created, description string, is_published bool) error {
 	query := `
-		INSERT INTO articles (title, body, category, date_created, is_published) VALUES ($1, $2, $3, $4, $5)`
-	_, err := db.Conn.Exec(context.Background(), query, title, body, category, date_created, is_published)
+		INSERT INTO articles (title, body, category, date_created, is_published, description) VALUES ($1, $2, $3, $4, $5, $6)`
+	_, err := db.Conn.Exec(context.Background(), query, title, body, category, date_created, is_published, description)
 	if err != nil {
 		return err
 	}

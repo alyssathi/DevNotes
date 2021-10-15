@@ -12,6 +12,7 @@ type Article struct {
 	Title        string `json:"title"`
 	Date_created string `json:"date_created"`
 	Body         string `json:"body"`
+	Description  string `json:"description"`
 	Category     string `json:"category"`
 	Is_published bool   `json:"is_published"`
 }

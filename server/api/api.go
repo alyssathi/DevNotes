@@ -91,7 +91,7 @@ func (c *Controller) SaveArticle(w http.ResponseWriter, r *http.Request) error {
 	}
 	a.Date_created = time.Now().Format("January 2, 2006")
 
-	err = c.DB.SaveArticleToDB(a.Title, a.Body, a.Category, a.Date_created, a.Is_published)
+	err = c.DB.SaveArticleToDB(a.Title, a.Body, a.Category, a.Date_created, a.Description, a.Is_published)
 	if err != nil {
 		return err
 	}

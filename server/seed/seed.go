@@ -34,10 +34,11 @@ func (s *Seed) InsertFakeArticle() error {
 	title := faker.Commerce().ProductName()
 	date := time.Now().String()
 	body := faker.Lorem().Paragraphs(3)[1]
+	description := faker.Lorem().Paragraph(4)
 
-	query := `INSERT INTO articles (title, date_created, body, category, is_published) VALUES ($1, $2, $3, $4, $5);`
+	query := `INSERT INTO articles (title, date_created, body, category, is_published, description) VALUES ($1, $2, $3, $4, $5, $6);`
 
-	_, err := s.DB.Conn.Exec(context.Background(), query, title, date, body, category, true)
+	_, err := s.DB.Conn.Exec(context.Background(), query, title, date, body, category, true, description)
 	if err != nil {
 		fmt.Println(err)
 		return err
