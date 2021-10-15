@@ -8,7 +8,7 @@ export default function Routes() {
 				<Route path="/adminEditor" component={AdminEditor} />
 				<Route path="/adminPanel" component={AdminPanel} />
 				<Route path="/adminLogin" component={AdminLogin} />
-				<Route exact path="/article/:id" component={Article} />
+				<Route exact path="/article" component={Article} />
 				<Route exact path="/" component={Landing} />
 			</Switch>
 		</Router>

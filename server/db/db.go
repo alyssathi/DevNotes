@@ -65,8 +65,14 @@ func (db *DB) GetArticles(isPublic bool) (interface{}, error) {
 }
 
 func (db *DB) GetArticleByID(id string) (*devNotes.Article, error) {
-	//getting article based on id
-	return nil, nil
+	query := `
+		SELECT title, date_created, body, category, is_published FROM articles WHERE id = $1`
+	dbArticle := &devNotes.Article{}
+	err := db.Conn.QueryRow(context.Background(), query, id).Scan(&dbArticle.Title, &dbArticle.Date_created, &dbArticle.Body, &dbArticle.Category, &dbArticle.Is_published)
+	if err != nil {
+		return nil, err
+	}
+	return dbArticle, nil
 }
 
 func (db *DB) SaveArticleToDB(title, body, category string, date_created time.Time, is_published bool) error {

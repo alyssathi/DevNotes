@@ -39,6 +39,7 @@ func New(db *db.DB) (*Controller, error) {
 	r.HandleFunc("/api/get-articles", WithError(c.GetPublicArticles))
 	r.HandleFunc("/api/get-all-articles", WithError(c.GetAllArticles))
 	r.HandleFunc("/api/get-categories", WithError(c.GetCategories))
+	r.HandleFunc("/api/get-article/{id}", WithError(c.GetArticle))
 
 	return c, nil
 }
@@ -113,5 +114,15 @@ func (c *Controller) GetCategories(w http.ResponseWriter, r *http.Request) error
 		return err
 	}
 	json.NewEncoder(w).Encode(arr)
+	return nil
+}
+
+func (c *Controller) GetArticle(w http.ResponseWriter, r *http.Request) error {
+	id := chi.URLParam(r, "id")
+	article, err := c.DB.GetArticleByID(id)
+	if err != nil {
+		return err
+	}
+	json.NewEncoder(w).Encode(article)
 	return nil
 }
