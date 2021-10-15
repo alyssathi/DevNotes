@@ -2,10 +2,12 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import React from "react";
 import { ContextContainer } from "../../utils/contextContainer";
 import { useAllArticles } from "../../utils/useGetArticles";
+import { SimpleModal } from "../modal";
 import { sx } from "./articleTableCss";
 
 export function ArticleTable() {
@@ -61,9 +63,16 @@ export function ArticleTable() {
 								<IconButton color="primary">
 									<EditIcon />
 								</IconButton>
-								<IconButton onClick={() => deleteArticle(article.id)} color="error">
-									<DeleteIcon />
-								</IconButton>
+								<SimpleModal buttonName={<DeleteIcon />}>
+									<>
+										<Typography>
+											Are you sure you want to delete <b> {article.title}</b> permanently?
+										</Typography>
+										<Button onClick={() => deleteArticle(article.id)} variant="outlined" color="error">
+											Delete
+										</Button>
+									</>
+								</SimpleModal>
 							</TableCell>
 						</TableRow>
 					))}
