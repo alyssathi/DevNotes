@@ -2,6 +2,7 @@ import { Button, TextField, Typography } from "@mui/material";
 import React, { useRef } from "react";
 import { useHistory } from "react-router";
 import { Layout } from "../../components";
+import { ContextContainer } from "../../utils/contextContainer";
 import { useStyles } from "./adminLoginCss";
 
 export function AdminLogin() {
@@ -9,6 +10,12 @@ export function AdminLogin() {
 	const usernameRef = useRef<HTMLInputElement>();
 	const passwordRef = useRef<HTMLInputElement>();
 	const history = useHistory();
+	const { loggedIn, setLoggedIn } = ContextContainer.useContainer();
+
+	if (loggedIn) {
+		history.push("/adminPanel");
+	}
+
 	async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		try {
@@ -23,6 +30,7 @@ export function AdminLogin() {
 
 			const data = await response.json();
 			if (data === 200) {
+				setLoggedIn(true);
 				history.push("/adminPanel");
 			}
 		} catch (err) {

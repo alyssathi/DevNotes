@@ -1,4 +1,7 @@
+import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import { Layout } from "../../components";
 import { IArticle } from "../../utils/contextContainer";
 
 export function Article() {
@@ -7,6 +10,7 @@ export function Article() {
 	const param = new URLSearchParams(queryString);
 	const id = param.get("id");
 	const [article, setArticle] = useState<IArticle | null>(null);
+	var hdate = require("human-date");
 
 	useEffect(() => {
 		let isMounted = true;
@@ -31,10 +35,12 @@ export function Article() {
 		};
 	}, []);
 	return (
-		<div>
-			<h1>{article?.title}</h1>
-			<h1>{article?.date_created?.toString()}</h1>
-			<p>{article?.body}</p>
-		</div>
+		<Layout>
+			<Box>
+				<Typography variant="h1">{article?.title}</Typography>
+				<Typography variant="subtitle1">{article ? hdate.prettyPrint(article.date_created) : null}</Typography>
+				<Typography variant="body1">{article?.body}</Typography>
+			</Box>
+		</Layout>
 	);
 }

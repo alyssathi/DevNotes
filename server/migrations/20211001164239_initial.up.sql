@@ -18,7 +18,7 @@ CREATE INDEX IF NOT EXISTS sessions_expiry_idx ON sessions (expiry);
 CREATE TABLE IF NOT EXISTS articles (
     id uuid NOT NULL DEFAULT uuid_generate_v4 (),
     title text NOT NULL,
-    date_created timestamp NOT NULL,
+    date_created text NOT NULL,
     body text NOT NULL,
     category text NOT NULL,
     is_published boolean NOT NULL

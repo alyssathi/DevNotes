@@ -4,7 +4,6 @@ import (
 	"context"
 	"devNotes"
 	"fmt"
-	"time"
 
 	"github.com/jackc/pgx/v4/pgxpool"
 )
@@ -75,7 +74,7 @@ func (db *DB) GetArticleByID(id string) (*devNotes.Article, error) {
 	return dbArticle, nil
 }
 
-func (db *DB) SaveArticleToDB(title, body, category string, date_created time.Time, is_published bool) error {
+func (db *DB) SaveArticleToDB(title, body, category, date_created string, is_published bool) error {
 	query := `
 		INSERT INTO articles (title, body, category, date_created, is_published) VALUES ($1, $2, $3, $4, $5)`
 	_, err := db.Conn.Exec(context.Background(), query, title, body, category, date_created, is_published)

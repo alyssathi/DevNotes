@@ -17,6 +17,7 @@ export function MarkdownInput() {
 	async function handleSaveArticle(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		try {
+			console.log(isPublished);
 			const response = await fetch("/api/save-article", {
 				method: "POST",
 				headers: { "content-type": "application/json" },
@@ -24,7 +25,7 @@ export function MarkdownInput() {
 					title: titleRef?.current?.value,
 					category: category,
 					body: bodyRef?.current?.value,
-					isPublished: isPublished,
+					is_published: isPublished,
 				}),
 			});
 			const data = await response.json();
