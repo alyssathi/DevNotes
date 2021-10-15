@@ -3,14 +3,16 @@ import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { Layout } from "../../components";
 import { IArticle } from "../../utils/contextContainer";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { sx } from "./articleCss";
 
 export function Article() {
 	// const params = new URLSearchParams(paramString);
 	const queryString = window.location.search;
 	const param = new URLSearchParams(queryString);
 	const id = param.get("id");
-	const [article, setArticle] = useState<IArticle | null>(null);
-	var hdate = require("human-date");
+	const [article, setArticle] = useState<IArticle>();
 
 	useEffect(() => {
 		let isMounted = true;
@@ -23,7 +25,6 @@ export function Article() {
 				const data: IArticle = await response.json();
 				if (isMounted) {
 					setArticle(data);
-					console.log(data);
 				}
 			} catch (err) {
 				console.error(err);
@@ -33,13 +34,27 @@ export function Article() {
 		return () => {
 			isMounted = false;
 		};
-	}, []);
+	}, [id]);
+
 	return (
 		<Layout>
-			<Box>
-				<Typography variant="h1">{article?.title}</Typography>
-				<Typography variant="subtitle1">{article ? hdate.prettyPrint(article.date_created) : null}</Typography>
-				<Typography variant="body1">{article?.body}</Typography>
+			<Box sx={sx.container}>
+				<Typography sx={sx.title} variant="h1">
+					{article?.title}
+				</Typography>
+				<Box sx={sx.info}>
+					<Typography variant="subtitle1">
+						<b>Published:</b> {article?.date_created}
+					</Typography>
+					<Typography variant="subtitle1">
+						<b>Category:</b> {article?.category}
+					</Typography>
+				</Box>
+				<Box sx={sx.bodyContainer}>
+					<Typography variant="body1">
+						<ReactMarkdown children={article ? article.body : ""} remarkPlugins={[remarkGfm]} />
+					</Typography>
+				</Box>
 			</Box>
 		</Layout>
 	);

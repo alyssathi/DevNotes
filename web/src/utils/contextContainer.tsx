@@ -6,7 +6,7 @@ export interface IArticle {
 	id: string | null;
 	title: string | null;
 	date_created: string | null;
-	body: string | null;
+	body: string;
 	category: string | null;
 	is_published?: boolean | null;
 }
