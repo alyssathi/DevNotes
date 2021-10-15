@@ -96,3 +96,14 @@ func (db *DB) GetCategories() ([]string, error) {
 	fmt.Println(arr)
 	return arr, nil
 }
+
+func (db *DB) DeleteArticle(id string) error {
+	query := `
+		DELETE FROM articles WHERE id = $1;`
+	_, err := db.Conn.Exec(context.Background(), query, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

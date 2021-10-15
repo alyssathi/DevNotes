@@ -28,9 +28,11 @@ export function AdminPanel() {
 	return (
 		<Layout>
 			<Box sx={sx.container}>
-				<Box>
+				<Box sx={sx.title}>
 					<Typography variant="h3">Admin Panel</Typography>
-					<Button onClick={handleLogout}>Logout</Button>
+					<Button variant="outlined" onClick={handleLogout}>
+						Logout
+					</Button>
 				</Box>
 
 				<ArticleTable />

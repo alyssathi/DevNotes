@@ -11,6 +11,18 @@ import { sx } from "./articleTableCss";
 export function ArticleTable() {
 	useAllArticles();
 
+	async function deleteArticle(id: string | null) {
+		try {
+			const response = await fetch(`/api/delete-article/${id}`);
+			const data = await response.json();
+			if (data === 200) {
+				window.location.reload();
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
 	const { allArticles } = ContextContainer.useContainer();
 	if (allArticles === null) return null;
 	return (
@@ -49,7 +61,7 @@ export function ArticleTable() {
 								<IconButton color="primary">
 									<EditIcon />
 								</IconButton>
-								<IconButton color="error">
+								<IconButton onClick={() => deleteArticle(article.id)} color="error">
 									<DeleteIcon />
 								</IconButton>
 							</TableCell>

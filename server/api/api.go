@@ -37,6 +37,7 @@ func New(db *db.DB) (*Controller, error) {
 	r.HandleFunc("/api/login_user", WithError(c.LoginUser))
 	r.HandleFunc("/api/logout-user", WithError(c.LogoutUser))
 	r.HandleFunc("/api/save-article", WithUser(sessionManager, WithError(c.SaveArticle)))
+	r.HandleFunc("/api/delete-article/{id}", WithUser(sessionManager, WithError(c.DeleteArticle)))
 	r.HandleFunc("/api/get-articles", WithError(c.GetPublicArticles))
 	r.HandleFunc("/api/get-all-articles", WithError(c.GetAllArticles))
 	r.HandleFunc("/api/get-categories", WithError(c.GetCategories))
@@ -90,8 +91,18 @@ func (c *Controller) SaveArticle(w http.ResponseWriter, r *http.Request) error {
 	}
 	a.Date_created = time.Now().Format("January 2, 2006")
 
-	fmt.Println(a)
 	err = c.DB.SaveArticleToDB(a.Title, a.Body, a.Category, a.Date_created, a.Is_published)
+	if err != nil {
+		return err
+	}
+	json.NewEncoder(w).Encode(http.StatusOK)
+	return nil
+}
+
+func (c *Controller) DeleteArticle(w http.ResponseWriter, r *http.Request) error {
+	id := chi.URLParam(r, "id")
+
+	err := c.DB.DeleteArticle(id)
 	if err != nil {
 		return err
 	}
