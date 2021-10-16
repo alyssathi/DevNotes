@@ -6,6 +6,7 @@ interface ISX {
 	even: SxProps<Theme>;
 	odd: SxProps<Theme>;
 	container: SxProps<Theme>;
+	modal: SxProps<Theme>;
 }
 
 export const sx: ISX = {
@@ -30,5 +31,9 @@ export const sx: ISX = {
 		maxWidth: "95vw",
 		borderRadius: ".5rem",
 		marginBottom: "2.5rem",
+	},
+	modal: {
+		width: "300px",
+		height: "150px",
 	},
 };

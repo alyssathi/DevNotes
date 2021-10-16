@@ -12,7 +12,10 @@ export const useStyles = makeStyles({
 		marginBottom: "1rem",
 	},
 	body: {
-		width: "100%",
+		width: "95%",
+	},
+	description: {
+		width: "95%",
 	},
 	category: {
 		display: "flex",

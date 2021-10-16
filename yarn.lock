@@ -196,6 +196,11 @@ hoist-non-react-statics@^3.3.2:
   dependencies:
     react-is "^16.7.0"
 
+human-date@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/human-date/-/human-date-1.4.0.tgz#88bb62bd804d00fd12ee2f47dc3c3bbb1e55f99a"
+  integrity sha1-iLtivYBNAP0S7i9H3Dw7ux5V+Zo=
+
 "js-tokens@^3.0.0 || ^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"

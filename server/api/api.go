@@ -35,10 +35,13 @@ func New(db *db.DB) (*Controller, error) {
 
 	//this middleware chaining took me way too long. WithError takes in a special type of handlerfunc that allows me to return an error for each of my handlers and it returns a regular handler function. This is how I'm able to chain WithError to WithUser that takes in sessions and a handler func. WithError accounts for the handlerfunc and I can just pass in my session manager
 	r.HandleFunc("/api/login_user", WithError(c.LoginUser))
+	r.HandleFunc("/api/logout-user", WithError(c.LogoutUser))
 	r.HandleFunc("/api/save-article", WithUser(sessionManager, WithError(c.SaveArticle)))
+	r.HandleFunc("/api/delete-article/{id}", WithUser(sessionManager, WithError(c.DeleteArticle)))
 	r.HandleFunc("/api/get-articles", WithError(c.GetPublicArticles))
 	r.HandleFunc("/api/get-all-articles", WithError(c.GetAllArticles))
 	r.HandleFunc("/api/get-categories", WithError(c.GetCategories))
+	r.HandleFunc("/api/get-article/{id}", WithError(c.GetArticle))
 
 	return c, nil
 }
@@ -57,7 +60,6 @@ func (c *Controller) LoginUser(w http.ResponseWriter, r *http.Request) error {
 	}
 	//this will have to be changed to hashed for production
 	if u.Password != dbUser.Password {
-		w.WriteHeader(http.StatusBadRequest)
 		err = errors.New("passwords do not match")
 		return err
 	}
@@ -70,6 +72,15 @@ func (c *Controller) LoginUser(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
+func (c *Controller) LogoutUser(w http.ResponseWriter, r *http.Request) error {
+	err := c.Sessions.Destroy(r.Context())
+	if err != nil {
+		return err
+	}
+	json.NewEncoder(w).Encode(http.StatusOK)
+	return nil
+}
+
 func (c *Controller) SaveArticle(w http.ResponseWriter, r *http.Request) error {
 	//saving to articles db
 	a := &devNotes.Article{}
@@ -78,10 +89,20 @@ func (c *Controller) SaveArticle(w http.ResponseWriter, r *http.Request) error {
 	if err != nil {
 		return err
 	}
-	a.Date_created = time.Now()
+	a.Date_created = time.Now().Format("January 2, 2006")
 
-	fmt.Println(a)
-	err = c.DB.SaveArticleToDB(a.Title, a.Body, a.Category, a.Date_created, a.Is_published)
+	err = c.DB.SaveArticleToDB(a.Title, a.Body, a.Category, a.Date_created, a.Description, a.Is_published)
+	if err != nil {
+		return err
+	}
+	json.NewEncoder(w).Encode(http.StatusOK)
+	return nil
+}
+
+func (c *Controller) DeleteArticle(w http.ResponseWriter, r *http.Request) error {
+	id := chi.URLParam(r, "id")
+
+	err := c.DB.DeleteArticle(id)
 	if err != nil {
 		return err
 	}
@@ -113,5 +134,15 @@ func (c *Controller) GetCategories(w http.ResponseWriter, r *http.Request) error
 		return err
 	}
 	json.NewEncoder(w).Encode(arr)
+	return nil
+}
+
+func (c *Controller) GetArticle(w http.ResponseWriter, r *http.Request) error {
+	id := chi.URLParam(r, "id")
+	article, err := c.DB.GetArticleByID(id)
+	if err != nil {
+		return err
+	}
+	json.NewEncoder(w).Encode(article)
 	return nil
 }

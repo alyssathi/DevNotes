@@ -10,9 +10,10 @@ export const sx: ISX = {
 		display: "flex",
 		flexWrap: "wrap",
 		justifyContent: "space-between",
+		backgroundColor: "secondary.light",
 	},
 	summary: {
-		backgroundColor: "secondary.light",
+		backgroundColor: "secondary.main",
 		color: "primary.dark",
 	},
 };

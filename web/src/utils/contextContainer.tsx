@@ -6,7 +6,8 @@ export interface IArticle {
 	id: string | null;
 	title: string | null;
 	date_created: string | null;
-	body: string | null;
+	body: string;
+	description: string;
 	category: string | null;
 	is_published?: boolean | null;
 }
@@ -14,6 +15,7 @@ export interface IArticle {
 export type categorytype = string | null;
 
 function ContextDataContainer() {
+	const [loggedIn, setLoggedIn] = useState<boolean>(false);
 	const [publicArticles, setPublicArticles] = useState<IArticle[]>([]);
 	const [allArticles, setAllArticles] = useState<IArticle[]>([]);
 	const [categories, setCategories] = useState<categorytype[]>([]);
@@ -25,6 +27,8 @@ function ContextDataContainer() {
 		setAllArticles,
 		categories,
 		setCategories,
+		loggedIn,
+		setLoggedIn,
 	};
 }
 

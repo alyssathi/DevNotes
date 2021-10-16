@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@mui/icons-material": "^5.0.3",
-    "@mui/material": "^5.0.3"
+    "@mui/material": "^5.0.3",
+    "human-date": "^1.4.0"
   }
 }

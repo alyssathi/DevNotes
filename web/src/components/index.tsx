@@ -4,3 +4,4 @@ export * from "./articleTable";
 export * from "./articleList";
 export * from "./markdownInput";
 export * from "./layout";
+export * from "./modal";

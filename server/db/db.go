@@ -4,7 +4,6 @@ import (
 	"context"
 	"devNotes"
 	"fmt"
-	"time"
 
 	"github.com/jackc/pgx/v4/pgxpool"
 )
@@ -65,14 +64,20 @@ func (db *DB) GetArticles(isPublic bool) (interface{}, error) {
 }
 
 func (db *DB) GetArticleByID(id string) (*devNotes.Article, error) {
-	//getting article based on id
-	return nil, nil
+	query := `
+		SELECT title, date_created, body, category, is_published FROM articles WHERE id = $1`
+	dbArticle := &devNotes.Article{}
+	err := db.Conn.QueryRow(context.Background(), query, id).Scan(&dbArticle.Title, &dbArticle.Date_created, &dbArticle.Body, &dbArticle.Category, &dbArticle.Is_published)
+	if err != nil {
+		return nil, err
+	}
+	return dbArticle, nil
 }
 
-func (db *DB) SaveArticleToDB(title, body, category string, date_created time.Time, is_published bool) error {
+func (db *DB) SaveArticleToDB(title, body, category, date_created, description string, is_published bool) error {
 	query := `
-		INSERT INTO articles (title, body, category, date_created, is_published) VALUES ($1, $2, $3, $4, $5)`
-	_, err := db.Conn.Exec(context.Background(), query, title, body, category, date_created, is_published)
+		INSERT INTO articles (title, body, category, date_created, is_published, description) VALUES ($1, $2, $3, $4, $5, $6)`
+	_, err := db.Conn.Exec(context.Background(), query, title, body, category, date_created, is_published, description)
 	if err != nil {
 		return err
 	}
@@ -90,4 +95,15 @@ func (db *DB) GetCategories() ([]string, error) {
 
 	fmt.Println(arr)
 	return arr, nil
+}
+
+func (db *DB) DeleteArticle(id string) error {
+	query := `
+		DELETE FROM articles WHERE id = $1;`
+	_, err := db.Conn.Exec(context.Background(), query, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

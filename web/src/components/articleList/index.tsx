@@ -27,6 +27,7 @@ export function ArticleList({ category }: IArticleListProps) {
 						title={article.title}
 						body={article.body}
 						category={article.category}
+						description={article.description}
 						date_created={article.date_created}
 					/>
 				);
