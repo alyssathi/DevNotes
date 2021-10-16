@@ -1,11 +1,11 @@
-import { Box, Button, Fab, FormControl, IconButton, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { Box, Button, Fab, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import React, { useRef, useState } from "react";
+import { useHistory } from "react-router";
+import { SimpleModal } from "..";
 import { ContextContainer } from "../../utils/contextContainer";
 import { useGetCategories } from "../../utils/useGetCategories";
 import { useStyles } from "./markdownInputCss";
-import AddIcon from "@mui/icons-material/Add";
-import { useHistory } from "react-router";
-import { SimpleModal } from "..";
 
 export function MarkdownInput() {
 	useGetCategories();
@@ -18,7 +18,7 @@ export function MarkdownInput() {
 	const [isPublished, setIsPublished] = useState<boolean>(false);
 	const [category, setCategory] = useState<string | undefined>("");
 	const history = useHistory();
-	const [open, setOpen] = React.useState<boolean>(false);
+	const [inputOpen, setInputOpen] = React.useState<boolean>(false);
 
 	async function handleSaveArticle(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -79,7 +79,7 @@ export function MarkdownInput() {
 				})();
 			}
 			setCategory(categoryRef?.current?.value.trim());
-			setOpen(false);
+			setInputOpen(false);
 		} catch (err) {
 			console.log(err);
 		}
@@ -116,7 +116,7 @@ export function MarkdownInput() {
 						})}
 					</Select>
 				</FormControl>
-				<SimpleModal setOpen={setOpen} open={open} buttonName={<AddIcon />}>
+				<SimpleModal setInputOpen={setInputOpen} inputOpen={inputOpen} buttonName={<AddIcon />}>
 					<form onSubmit={handleAddCategory}>
 						<TextField
 							required
