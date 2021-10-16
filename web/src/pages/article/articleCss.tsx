@@ -10,6 +10,7 @@ interface ISX {
 export const sx: ISX = {
 	title: {
 		textAlign: "center",
+		margin: "1rem",
 	},
 	info: {
 		width: "100%",

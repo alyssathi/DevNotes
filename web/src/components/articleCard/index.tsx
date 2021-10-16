@@ -13,7 +13,7 @@ export function ArticleCard({ title, body, id, description, date_created, catego
 		<Card onClick={handleCardClick} sx={sx.container}>
 			<CardMedia />
 			<CardContent>
-				<Typography variant="h6">
+				<Typography variant="h2">
 					{category}: {title}
 				</Typography>
 				<Typography variant="subtitle1" sx={sx.body}>

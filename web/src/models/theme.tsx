@@ -1,41 +1,53 @@
 import { createTheme } from "@mui/material";
 import "@fontsource/abeezee";
 import "@fontsource/aleo";
+import "@fontsource/abel";
+import "@fontsource/abril-fatface";
+import "@fontsource/abhaya-libre";
 
 export const theme = createTheme({
 	palette: {
 		primary: {
-			main: "#74a08b",
+			main: "#e0c0a9",
 		},
 		secondary: {
-			main: "#FDF0D5",
+			main: "#484b4d",
 		},
 	},
 	typography: {
 		fontFamily: "Aleo",
 		h1: {
-			fontFamily: "ABeeZee",
-			fontSize: "5rem",
+			fontFamily: "Abhaya Libre",
+			fontSize: "3rem",
+			fontWeight: "bolder",
 		},
 		h2: {
-			fontFamily: "ABeeZee",
-			fontSize: "4.25rem",
+			fontFamily: "Abhaya Libre",
+			fontSize: "2.3rem",
+			fontWeight: "bolder",
 		},
 		h3: {
-			fontFamily: "ABeeZee",
-			fontSize: "3.5rem",
+			fontFamily: "Abril Fatface",
+			fontSize: "2rem",
+			fontWeight: "bolder",
 		},
 		h4: {
-			fontFamily: "ABeeZee",
-			fontSize: "2.75rem",
+			fontFamily: "Abhaya Libre",
+			fontSize: "1.75rem",
+			fontWeight: "bolder",
 		},
 		h5: {
-			fontFamily: "ABeeZee",
-			fontSize: "2rem",
+			fontFamily: "Abhaya Libre",
+			fontSize: "1.5rem",
+			fontWeight: "bolder",
 		},
 		h6: {
-			fontFamily: "ABeeZee",
-			fontSize: "1.5rem",
+			fontFamily: "Abril Fatface",
+			fontSize: "1.25rem",
+			fontWeight: "bolder",
+		},
+		subtitle1: {
+			fontFamily: "Abel",
 		},
 	},
 });

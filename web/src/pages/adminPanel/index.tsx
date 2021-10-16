@@ -29,15 +29,17 @@ export function AdminPanel() {
 		<Layout>
 			<Box sx={sx.container}>
 				<Box sx={sx.title}>
-					<Typography variant="h3">Admin Panel</Typography>
+					<Typography variant="h2" color="secondary">
+						Admin Panel
+					</Typography>
 					<Button variant="outlined" onClick={handleLogout}>
 						Logout
 					</Button>
 				</Box>
 
 				<ArticleTable />
-				<Fab color="primary" sx={sx.fab} onClick={() => history.push("/adminEditor")}>
-					<AddIcon color="secondary" />
+				<Fab color="secondary" sx={sx.fab} onClick={() => history.push("/adminEditor")}>
+					<AddIcon color="primary" />
 				</Fab>
 			</Box>
 		</Layout>

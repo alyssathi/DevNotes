@@ -8,7 +8,7 @@ export function AdminEditor() {
 	return (
 		<Layout>
 			<div className={css.container}>
-				<Typography color="primary" variant="h2">
+				<Typography color="secondary" variant="h2">
 					Article Editor
 				</Typography>
 				<MarkdownInput />

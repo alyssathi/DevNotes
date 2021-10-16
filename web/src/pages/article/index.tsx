@@ -39,7 +39,7 @@ export function Article() {
 	return (
 		<Layout>
 			<Box sx={sx.container}>
-				<Typography sx={sx.title} variant="h1">
+				<Typography sx={sx.title} variant="h1" color="secondary">
 					{article?.title}
 				</Typography>
 				<Box sx={sx.info}>

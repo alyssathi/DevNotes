@@ -11,7 +11,7 @@ function Header(): JSX.Element {
 		<AppBar>
 			<Toolbar className={css.header}>
 				<div onClick={() => history.push("/")} className={css.logo}>
-					<Typography color="secondary" variant="h3">
+					<Typography color="secondary" variant="h1">
 						DevNotes
 					</Typography>
 				</div>

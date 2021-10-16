@@ -14,17 +14,17 @@ export const sx: ISX = {
 		display: "flex",
 	},
 	head: {
-		backgroundColor: "secondary.dark",
+		backgroundColor: "primary.dark",
 		color: "white",
 		fontSize: "1.2rem",
 		textAlign: "center",
 	},
 	even: {
-		backgroundColor: "secondary.light",
+		backgroundColor: "primary.light",
 		minWidth: "7rem",
 	},
 	odd: {
-		backgroundColor: "secondary.main",
+		backgroundColor: "primary.main",
 		minWidth: "7rem",
 	},
 	container: {

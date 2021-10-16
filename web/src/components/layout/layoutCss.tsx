@@ -4,14 +4,13 @@ export const useStyles = makeStyles({
 	header: {
 		display: "flex",
 		justifyContent: "space-between",
+		height: "57px",
 	},
 	main: {
-		marginTop: "4.5rem",
+		marginTop: "57px",
 		minHeight: "90vh",
 	},
-	button: {
-		margin: ".5rem",
-	},
+	button: {},
 	logo: {
 		"&:hover": { cursor: "pointer" },
 	},

@@ -152,10 +152,10 @@ export function MarkdownInput() {
 				className={css.body}
 				placeholder="The good stuff of your awesome new note!"
 			/>
-			<Fab sx={{ position: "fixed", bottom: "3rem", right: ".5rem" }} color="secondary" variant="extended" type="submit" onClick={() => setIsPublished(true)}>
+			<Fab sx={{ position: "fixed", bottom: "3rem", right: ".5rem" }} color="primary" variant="extended" type="submit" onClick={() => setIsPublished(true)}>
 				<b>Publish</b>
 			</Fab>
-			<Fab sx={{ position: "fixed", bottom: "3rem", right: "6.5rem" }} color="primary" variant="extended" type="submit" onClick={() => setIsPublished(false)}>
+			<Fab sx={{ position: "fixed", bottom: "3rem", right: "6.5rem" }} color="secondary" variant="extended" type="submit" onClick={() => setIsPublished(false)}>
 				Save Draft
 			</Fab>
 		</form>
