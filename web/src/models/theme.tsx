@@ -1,8 +1,6 @@
 import { createTheme } from "@mui/material";
-import "@fontsource/abeezee";
 import "@fontsource/aleo";
 import "@fontsource/abel";
-import "@fontsource/abril-fatface";
 import "@fontsource/abhaya-libre";
 
 export const theme = createTheme({
@@ -27,7 +25,7 @@ export const theme = createTheme({
 			fontWeight: "bolder",
 		},
 		h3: {
-			fontFamily: "Abril Fatface",
+			fontFamily: "Abhaya Libre",
 			fontSize: "2rem",
 			fontWeight: "bolder",
 		},
@@ -42,12 +40,13 @@ export const theme = createTheme({
 			fontWeight: "bolder",
 		},
 		h6: {
-			fontFamily: "Abril Fatface",
+			fontFamily: "Abhaya Libre",
 			fontSize: "1.25rem",
 			fontWeight: "bolder",
 		},
 		subtitle1: {
 			fontFamily: "Abel",
+			lineHeight: "18px",
 		},
 	},
 });

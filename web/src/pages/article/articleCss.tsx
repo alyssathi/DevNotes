@@ -5,26 +5,33 @@ interface ISX {
 	bodyContainer: SxProps<Theme>;
 	info: SxProps<Theme>;
 	container: SxProps<Theme>;
+	containers: SxProps<Theme>;
 }
 
 export const sx: ISX = {
 	title: {
 		textAlign: "center",
-		margin: "1rem",
+		margin: "2rem",
 	},
 	info: {
 		width: "100%",
 		display: "flex",
 		justifyContent: "space-around",
-		marginBottom: "1rem",
+		marginBottom: "2rem",
 	},
 	bodyContainer: {
 		minWidth: "75%",
 		maxWidth: "100%",
 	},
 	container: {
-		maxWidth: "100%",
+		maxWidth: "960px",
 		margin: ".5rem",
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+	},
+	containers: {
+		width: "100%",
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",

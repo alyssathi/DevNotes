@@ -38,22 +38,24 @@ export function Article() {
 
 	return (
 		<Layout>
-			<Box sx={sx.container}>
-				<Typography sx={sx.title} variant="h1" color="secondary">
-					{article?.title}
-				</Typography>
-				<Box sx={sx.info}>
-					<Typography variant="subtitle1">
-						<b>Published:</b> {article?.date_created}
+			<Box sx={sx.containers}>
+				<Box sx={sx.container}>
+					<Typography sx={sx.title} variant="h1" color="secondary">
+						{article?.title}
 					</Typography>
-					<Typography variant="subtitle1">
-						<b>Category:</b> {article?.category}
-					</Typography>
-				</Box>
-				<Box sx={sx.bodyContainer}>
-					<Typography variant="body1">
-						<ReactMarkdown children={article ? article.body : ""} remarkPlugins={[remarkGfm]} />
-					</Typography>
+					<Box sx={sx.info}>
+						<Typography variant="subtitle1">
+							<b>Published:</b> {article?.date_created}
+						</Typography>
+						<Typography variant="subtitle1">
+							<b>Category:</b> {article?.category}
+						</Typography>
+					</Box>
+					<Box sx={sx.bodyContainer}>
+						<Typography variant="body1">
+							<ReactMarkdown children={article ? article.body : ""} remarkPlugins={[remarkGfm]} />
+						</Typography>
+					</Box>
 				</Box>
 			</Box>
 		</Layout>

@@ -2,7 +2,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import React from "react";
 import { ContextContainer } from "../../utils/contextContainer";
 import { useAllArticles } from "../../utils/useGetArticles";
@@ -59,19 +59,21 @@ export function ArticleTable() {
 								{article.is_published ? <CheckCircleOutlineIcon color="success" /> : <CancelIcon color="error" />}
 							</TableCell>
 							<TableCell sx={i % 2 === 0 ? sx.even : sx.odd} align="right">
-								<IconButton color="primary">
-									<EditIcon />
-								</IconButton>
-								<SimpleModal buttonName={<DeleteIcon />}>
-									<>
-										<Typography>
-											Are you sure you want to delete <b> {article.title}</b> permanently?
-										</Typography>
-										<Button onClick={() => deleteArticle(article.id)} variant="outlined" color="error">
-											Delete
-										</Button>
-									</>
-								</SimpleModal>
+								<Box sx={sx.actionContainer}>
+									<IconButton sx={sx.edit}>
+										<EditIcon />
+									</IconButton>
+									<SimpleModal buttonName={<DeleteIcon color="error" />}>
+										<>
+											<Typography>
+												Are you sure you want to delete <b> {article.title}</b> permanently?
+											</Typography>
+											<Button onClick={() => deleteArticle(article.id)} variant="outlined" color="error">
+												Delete
+											</Button>
+										</>
+									</SimpleModal>
+								</Box>
 							</TableCell>
 						</TableRow>
 					))}

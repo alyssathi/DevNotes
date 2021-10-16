@@ -32,7 +32,7 @@ export function AdminPanel() {
 					<Typography variant="h2" color="secondary">
 						Admin Panel
 					</Typography>
-					<Button variant="outlined" onClick={handleLogout}>
+					<Button variant="outlined" sx={sx.logout} onClick={handleLogout}>
 						Logout
 					</Button>
 				</Box>
