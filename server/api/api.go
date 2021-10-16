@@ -42,6 +42,7 @@ func New(db *db.DB) (*Controller, error) {
 	r.HandleFunc("/api/get-all-articles", WithError(c.GetAllArticles))
 	r.HandleFunc("/api/get-categories", WithError(c.GetCategories))
 	r.HandleFunc("/api/get-article/{id}", WithError(c.GetArticle))
+	r.HandleFunc("/api/add-category", WithUser(sessionManager, WithError(c.AddCategory)))
 
 	return c, nil
 }
@@ -144,5 +145,19 @@ func (c *Controller) GetArticle(w http.ResponseWriter, r *http.Request) error {
 		return err
 	}
 	json.NewEncoder(w).Encode(article)
+	return nil
+}
+
+func (c *Controller) AddCategory(w http.ResponseWriter, r *http.Request) error {
+	category := &devNotes.Category{}
+	err := json.NewDecoder(r.Body).Decode(&category)
+	if err != nil {
+		return err
+	}
+	err = c.DB.AddCategory(category.Category)
+	if err != nil {
+		return err
+	}
+	json.NewEncoder(w).Encode(http.StatusOK)
 	return nil
 }

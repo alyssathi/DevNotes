@@ -17,4 +17,7 @@ type Article struct {
 	Is_published bool   `json:"is_published"`
 }
 
+type Category struct {
+	Category string `json:"category"`
+}
 type ArticlesArray []Article

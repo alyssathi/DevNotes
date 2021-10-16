@@ -93,7 +93,6 @@ func (db *DB) GetCategories() ([]string, error) {
 		return nil, err
 	}
 
-	fmt.Println(arr)
 	return arr, nil
 }
 
@@ -105,5 +104,15 @@ func (db *DB) DeleteArticle(id string) error {
 		return err
 	}
 
+	return nil
+}
+
+func (db *DB) AddCategory(category string) error {
+	query := `
+		INSERT INTO categories (category) VALUES ($1)`
+	_, err := db.Conn.Exec(context.Background(), query, category)
+	if err != nil {
+		return err
+	}
 	return nil
 }

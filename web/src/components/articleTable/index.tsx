@@ -11,6 +11,7 @@ import { sx } from "./articleTableCss";
 
 export function ArticleTable() {
 	useAllArticles();
+	const [open, setOpen] = React.useState<boolean>(false);
 
 	async function deleteArticle(id: string | null) {
 		try {
@@ -62,7 +63,7 @@ export function ArticleTable() {
 								<IconButton color="primary">
 									<EditIcon />
 								</IconButton>
-								<SimpleModal buttonName={<DeleteIcon />}>
+								<SimpleModal open={open} setOpen={setOpen} buttonName={<DeleteIcon />}>
 									<>
 										<Typography>
 											Are you sure you want to delete <b> {article.title}</b> permanently?
