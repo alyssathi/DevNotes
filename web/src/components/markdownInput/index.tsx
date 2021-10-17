@@ -3,7 +3,8 @@ import { Box, Button, Fab, FormControl, InputLabel, MenuItem, Select, SelectChan
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { SimpleModal } from "..";
-import { ContextContainer } from "../../utils/contextContainer";
+import { ContextContainer, IArticle } from "../../utils/contextContainer";
+import { useGetArticle } from "../../utils/useGetArticle";
 import { useGetCategories } from "../../utils/useGetCategories";
 import { useStyles } from "./markdownInputCss";
 
@@ -19,6 +20,14 @@ export function MarkdownInput() {
 	const [category, setCategory] = useState<string | undefined>("");
 	const history = useHistory();
 	const [inputOpen, setInputOpen] = React.useState<boolean>(false);
+	const [article, setArticle] = useState<IArticle>();
+
+	const queryString = window.location.search;
+	const param = new URLSearchParams(queryString);
+	const id = param.get("id");
+
+	useGetArticle(id, setArticle, setCategory);
+	console.log(article?.category);
 
 	async function handleSaveArticle(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -85,11 +94,14 @@ export function MarkdownInput() {
 		}
 	}
 
+	if (article?.title === undefined) return null;
+
 	return (
 		<form onSubmit={handleSaveArticle} className={css.container}>
 			<TextField
 				required
 				inputRef={titleRef}
+				defaultValue={article?.title}
 				placeholder="Title"
 				InputProps={{
 					className: css.title,
@@ -137,6 +149,7 @@ export function MarkdownInput() {
 				InputProps={{
 					className: css.title,
 				}}
+				defaultValue={article?.description}
 				inputRef={descriptionRef}
 				multiline
 				minRows="5"
@@ -148,6 +161,7 @@ export function MarkdownInput() {
 					className: css.title,
 				}}
 				inputRef={bodyRef}
+				defaultValue={article?.body}
 				multiline
 				minRows="30"
 				className={css.body}

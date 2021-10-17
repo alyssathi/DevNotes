@@ -7,8 +7,8 @@ export interface IArticle {
 	title: string | null;
 	date_created: string | null;
 	body: string;
-	description: string;
-	category: string | null;
+	description: string | null;
+	category: string | undefined;
 	is_published?: boolean | null;
 }
 

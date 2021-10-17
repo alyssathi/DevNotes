@@ -1,10 +1,11 @@
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import { Layout } from "../../components";
-import { IArticle } from "../../utils/contextContainer";
+import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Layout } from "../../components";
+import { IArticle } from "../../utils/contextContainer";
+import { useGetArticle } from "../../utils/useGetArticle";
 import { sx } from "./articleCss";
 
 export function Article() {
@@ -14,27 +15,7 @@ export function Article() {
 	const id = param.get("id");
 	const [article, setArticle] = useState<IArticle>();
 
-	useEffect(() => {
-		let isMounted = true;
-		(async () => {
-			try {
-				const response = await fetch(`/api/get-article/${id}`, {
-					method: "GET",
-					headers: { "content-type": "application/json" },
-				});
-				const data: IArticle = await response.json();
-				if (isMounted) {
-					setArticle(data);
-				}
-			} catch (err) {
-				console.error(err);
-			}
-		})();
-
-		return () => {
-			isMounted = false;
-		};
-	}, [id]);
+	useGetArticle(id, setArticle);
 
 	return (
 		<Layout>

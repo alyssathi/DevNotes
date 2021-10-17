@@ -4,6 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Box, Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import React from "react";
+import { useHistory } from "react-router";
 import { ContextContainer } from "../../utils/contextContainer";
 import { useAllArticles } from "../../utils/useGetArticles";
 import { SimpleModal } from "../modal";
@@ -11,6 +12,7 @@ import { sx } from "./articleTableCss";
 
 export function ArticleTable() {
 	useAllArticles();
+	const history = useHistory();
 
 	async function deleteArticle(id: string | null) {
 		try {
@@ -21,6 +23,13 @@ export function ArticleTable() {
 			}
 		} catch (err) {
 			console.log(err);
+		}
+	}
+
+	function handleEdit(id: string | null) {
+		if (id !== null) {
+			history.push(`/adminEditor?id=${id}`);
+			return;
 		}
 	}
 
@@ -60,7 +69,7 @@ export function ArticleTable() {
 							</TableCell>
 							<TableCell sx={i % 2 === 0 ? sx.even : sx.odd} align="right">
 								<Box sx={sx.actionContainer}>
-									<IconButton sx={sx.edit}>
+									<IconButton sx={sx.edit} onClick={() => handleEdit(article?.id)}>
 										<EditIcon />
 									</IconButton>
 									<SimpleModal buttonName={<DeleteIcon color="error" />}>
