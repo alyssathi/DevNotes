@@ -47,7 +47,7 @@ export const theme = createTheme({
 		subtitle1: {
 			fontFamily: "Aleo",
 			fontSize: "1.1rem",
-			lineHeight: "18px",
+			lineHeight: "24px",
 		},
 	},
 });

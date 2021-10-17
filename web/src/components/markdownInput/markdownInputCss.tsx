@@ -20,6 +20,16 @@ export const useStyles = makeStyles({
 	category: {
 		display: "flex",
 		alignItems: "center",
+		marginRight: "1rem",
+	},
+	categoryContainer: {
+		display: "flex",
+		alignItems: "center",
 		marginBottom: "1rem",
+	},
+	form: {
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
 	},
 });

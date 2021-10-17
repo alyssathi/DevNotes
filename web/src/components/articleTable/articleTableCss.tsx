@@ -7,6 +7,7 @@ interface ISX {
 	odd: SxProps<Theme>;
 	container: SxProps<Theme>;
 	edit: SxProps<Theme>;
+	space: SxProps<Theme>;
 }
 
 export const sx: ISX = {
@@ -35,5 +36,8 @@ export const sx: ISX = {
 	},
 	edit: {
 		color: "primary.dark",
+	},
+	space: {
+		marginBottom: "1rem",
 	},
 };

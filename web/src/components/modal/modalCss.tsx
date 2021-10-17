@@ -11,7 +11,7 @@ export const sx: ISX = {
 		position: "absolute",
 		width: "300px",
 		padding: "1rem",
-		backgroundColor: "secondary.light",
+		backgroundColor: "primary.light",
 		borderRadius: ".5rem",
 	},
 	container: {

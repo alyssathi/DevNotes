@@ -96,7 +96,7 @@ export function MarkdownInput() {
 				}}
 				inputProps={{ style: { textAlign: "center", fontSize: "1.5rem", fontWeight: "bolder" } }}
 			/>
-			<Box className={css.category}>
+			<Box className={css.categoryContainer}>
 				<FormControl>
 					<InputLabel id="category-select-label">Category</InputLabel>
 					<Select
@@ -117,8 +117,9 @@ export function MarkdownInput() {
 					</Select>
 				</FormControl>
 				<SimpleModal setInputOpen={setInputOpen} inputOpen={inputOpen} buttonName={<AddIcon />}>
-					<form onSubmit={handleAddCategory}>
+					<Box component="form" className={css.form} onSubmit={handleAddCategory}>
 						<TextField
+							color="secondary"
 							required
 							inputRef={categoryRef}
 							label="New Category"
@@ -126,10 +127,10 @@ export function MarkdownInput() {
 								className: css.category,
 							}}
 						/>
-						<Button type="submit" variant="outlined">
+						<Button type="submit" variant="contained" color="secondary">
 							Add
 						</Button>
-					</form>
+					</Box>
 				</SimpleModal>
 			</Box>
 			<TextField

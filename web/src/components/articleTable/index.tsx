@@ -65,11 +65,11 @@ export function ArticleTable() {
 									</IconButton>
 									<SimpleModal buttonName={<DeleteIcon color="error" />}>
 										<>
-											<Typography>
+											<Typography variant="subtitle1" sx={sx.space}>
 												Are you sure you want to delete <b> {article.title}</b> permanently?
 											</Typography>
 											<Button onClick={() => deleteArticle(article.id)} variant="outlined" color="error">
-												Delete
+												<Typography variant="subtitle1">Delete</Typography>
 											</Button>
 										</>
 									</SimpleModal>
