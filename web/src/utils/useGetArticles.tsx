@@ -16,7 +16,7 @@ export function usePublicArticles() {
 				});
 				const data: IArticle[] = await response.json();
 				if (isMounted) {
-					setPublicArticles(data);
+					setPublicArticles(data.reverse());
 				}
 			} catch (err) {
 				console.error(err);
@@ -43,7 +43,7 @@ export function useAllArticles() {
 				});
 				const data: IArticle[] = await response.json();
 				if (isMounted) {
-					setAllArticles(data);
+					setAllArticles(data.reverse());
 				}
 			} catch (err) {
 				console.error(err);

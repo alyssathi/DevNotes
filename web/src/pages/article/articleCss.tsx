@@ -20,11 +20,10 @@ export const sx: ISX = {
 		marginBottom: "2rem",
 	},
 	bodyContainer: {
-		minWidth: "75%",
-		maxWidth: "100%",
+		width: ["100%", "100%", "90%"],
 	},
 	container: {
-		maxWidth: "960px",
+		width: ["100%", "90%", "80%"],
 		margin: ".5rem",
 		display: "flex",
 		flexDirection: "column",

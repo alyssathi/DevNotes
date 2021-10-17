@@ -32,7 +32,7 @@ func Run(s *Seed) error {
 func (s *Seed) InsertFakeArticle() error {
 	category := faker.Number().Between(1, 5)
 	title := faker.Commerce().ProductName()
-	date := time.Now().String()
+	date := time.Now().Format("January 2, 2006")
 	body := faker.Lorem().Paragraphs(3)[1]
 	description := faker.Lorem().Paragraph(4)
 

@@ -3,8 +3,6 @@ import { ContextContainer } from "./contextContainer";
 
 export function useGetCategories() {
 	const { setCategories } = ContextContainer.useContainer();
-
-	// this useEffect will run on every reload of the page component only
 	useEffect(() => {
 		let isMounted = true;
 		(async () => {
