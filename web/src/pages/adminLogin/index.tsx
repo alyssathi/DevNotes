@@ -51,7 +51,7 @@ export function AdminLogin() {
 						Login, Gorgeous!
 					</Typography>
 					<TextField fullWidth label="Username" inputRef={usernameRef} />
-					<TextField fullWidth label="Password" inputRef={passwordRef} />
+					<TextField fullWidth label="Password" type="password" inputRef={passwordRef} />
 					<Button variant="contained" color="secondary" fullWidth type="submit">
 						Submit
 					</Button>

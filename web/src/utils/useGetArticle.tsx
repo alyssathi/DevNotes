@@ -41,5 +41,5 @@ export function useGetArticle(
 		return () => {
 			isMounted = false;
 		};
-	}, [id]);
+	}, [id, setArticle, setCategory]);
 }

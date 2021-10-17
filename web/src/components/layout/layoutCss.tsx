@@ -40,6 +40,6 @@ export const useStyles = makeStyles({
 	},
 	main: {
 		marginTop: "64px",
-		minHeight: "90vh",
+		minHeight: "93vh",
 	},
 });

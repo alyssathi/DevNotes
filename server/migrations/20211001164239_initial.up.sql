@@ -25,6 +25,3 @@ CREATE TABLE IF NOT EXISTS articles (
     is_published boolean NOT NULL
 );
 
-INSERT INTO users (name, username, password_hash)
-    VALUES ('dev', 'dev', 'devdev');
-

@@ -31,7 +31,7 @@ func New(conn *pgxpool.Pool) (*DB, error) {
 
 func (db *DB) GetUserByUsername(username string) (*devNotes.User, error) {
 	query := `
-		SELECT id, name, username, password_hash FROM users WHERE username = $1`
+		SELECT id, name, username, password_hash FROM users WHERE username = $1;`
 	dbUser := &devNotes.User{}
 	err := db.Conn.QueryRow(context.Background(), query, username).Scan(&dbUser.Id, &dbUser.Name, &dbUser.Username, &dbUser.Password)
 	if err != nil {
@@ -65,7 +65,7 @@ func (db *DB) GetArticles(isPublic bool) (interface{}, error) {
 
 func (db *DB) GetArticleByID(id string) (*devNotes.Article, error) {
 	query := `
-		SELECT id, title, date_created, body, category, is_published, description FROM articles WHERE id = $1`
+		SELECT id, title, date_created, body, category, is_published, description FROM articles WHERE id = $1;`
 	dbArticle := &devNotes.Article{}
 	err := db.Conn.QueryRow(context.Background(), query, id).Scan(&dbArticle.Id, &dbArticle.Title, &dbArticle.Date_created, &dbArticle.Body, &dbArticle.Category, &dbArticle.Is_published, &dbArticle.Description)
 	if err != nil {
@@ -76,7 +76,7 @@ func (db *DB) GetArticleByID(id string) (*devNotes.Article, error) {
 
 func (db *DB) SaveArticleToDB(title, body, category, date_created, description string, is_published bool) error {
 	query := `
-		INSERT INTO articles (title, body, category, date_created, is_published, description) VALUES ($1, $2, $3, $4, $5, $6)`
+		INSERT INTO articles (title, body, category, date_created, is_published, description) VALUES ($1, $2, $3, $4, $5, $6);`
 	_, err := db.Conn.Exec(context.Background(), query, title, body, category, date_created, is_published, description)
 	if err != nil {
 		return err
@@ -109,8 +109,18 @@ func (db *DB) DeleteArticle(id string) error {
 
 func (db *DB) AddCategory(category string) error {
 	query := `
-		INSERT INTO categories (category) VALUES ($1)`
+		INSERT INTO categories (category) VALUES ($1);`
 	_, err := db.Conn.Exec(context.Background(), query, category)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (db *DB) UpdateArticle(id, title, body, category, date_created, description string, is_published bool) error {
+	query := `
+		UPDATE articles SET title = $1, body = $2, category = $3, date_created = $4, is_published = $5, description = $6 WHERE id = $7;`
+	_, err := db.Conn.Exec(context.Background(), query, title, body, category, date_created, is_published, description, id)
 	if err != nil {
 		return err
 	}

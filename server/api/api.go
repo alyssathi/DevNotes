@@ -4,7 +4,6 @@ import (
 	"devNotes"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"net/http"
 	"time"
 
@@ -43,12 +42,12 @@ func New(db *db.DB) (*Controller, error) {
 	r.HandleFunc("/api/get-categories", WithError(c.GetCategories))
 	r.HandleFunc("/api/get-article/{id}", WithError(c.GetArticle))
 	r.HandleFunc("/api/add-category", WithUser(sessionManager, WithError(c.AddCategory)))
+	r.HandleFunc("/api/update-article/{id}", WithUser(sessionManager, WithError(c.UpdateArticle)))
 
 	return c, nil
 }
 
 func (c *Controller) LoginUser(w http.ResponseWriter, r *http.Request) error {
-	fmt.Println("hit login")
 	u := &devNotes.User{}
 	err := json.NewDecoder(r.Body).Decode(u)
 	if err != nil {
@@ -158,6 +157,25 @@ func (c *Controller) AddCategory(w http.ResponseWriter, r *http.Request) error {
 	if err != nil {
 		return err
 	}
+	json.NewEncoder(w).Encode(http.StatusOK)
+	return nil
+}
+
+func (c *Controller) UpdateArticle(w http.ResponseWriter, r *http.Request) error {
+	a := &devNotes.Article{}
+	id := chi.URLParam(r, "id")
+
+	err := json.NewDecoder(r.Body).Decode(a)
+	if err != nil {
+		return err
+	}
+	a.Date_created = time.Now().Format("January 2, 2006")
+
+	err = c.DB.UpdateArticle(id, a.Title, a.Body, a.Category, a.Date_created, a.Description, a.Is_published)
+	if err != nil {
+		return err
+	}
+
 	json.NewEncoder(w).Encode(http.StatusOK)
 	return nil
 }

@@ -27,16 +27,22 @@ export function MarkdownInput() {
 	const id = param.get("id");
 
 	useGetArticle(id, setArticle, setCategory);
-	console.log(article?.category);
 
 	async function handleSaveArticle(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
 		if (titleRef?.current?.value.trim() === "" || bodyRef?.current?.value.trim() === "") return;
 
+		let api: string;
+
+		if (id) {
+			api = `/api/update-article/${id}`;
+		} else {
+			api = "/api/save-article";
+		}
+
 		try {
-			console.log(isPublished);
-			const response = await fetch("/api/save-article", {
+			const response = await fetch(api, {
 				method: "POST",
 				headers: { "content-type": "application/json" },
 				body: JSON.stringify({
@@ -62,7 +68,6 @@ export function MarkdownInput() {
 		if (categoryRef?.current?.value.trim() === "") return;
 
 		try {
-			console.log(isPublished);
 			const response = await fetch("/api/add-category", {
 				method: "POST",
 				headers: { "content-type": "application/json" },
