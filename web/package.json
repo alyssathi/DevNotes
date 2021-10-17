@@ -6,10 +6,9 @@
   "dependencies": {
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
-    "@fontsource/abeezee": "^4.5.0",
-    "@fontsource/abel": "^4.5.0",
     "@fontsource/abhaya-libre": "^4.5.0",
-    "@fontsource/abril-fatface": "^4.5.0",
+    "@fontsource/actor": "^4.5.0",
+    "@fontsource/aileron": "^4.5.0",
     "@fontsource/aleo": "^4.5.0",
     "@mui/icons-material": "^5.0.1",
     "@mui/lab": "^5.0.0-alpha.51",

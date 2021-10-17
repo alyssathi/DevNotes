@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material";
 import "@fontsource/aleo";
-import "@fontsource/abel";
 import "@fontsource/abhaya-libre";
+import "@fontsource/actor";
 
 export const theme = createTheme({
 	palette: {
@@ -13,7 +13,7 @@ export const theme = createTheme({
 		},
 	},
 	typography: {
-		fontFamily: "Aleo",
+		fontFamily: "Actor",
 		h1: {
 			fontFamily: "Abhaya Libre",
 			fontSize: "3rem",
@@ -45,7 +45,8 @@ export const theme = createTheme({
 			fontWeight: "bolder",
 		},
 		subtitle1: {
-			fontFamily: "Abel",
+			fontFamily: "Aleo",
+			fontSize: "1.1rem",
 			lineHeight: "18px",
 		},
 	},

@@ -1304,25 +1304,20 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fontsource/abeezee@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.npmjs.org/@fontsource/abeezee/-/abeezee-4.5.0.tgz"
-  integrity sha512-uh/NSOXYG/f88D1Tgqsei6hH4mFVqt6ZWwRkreg+mR/i9U31HYrMe9XOiz9Ko0I/DTXrD/+Y3txk9ykNH/yFZQ==
-
-"@fontsource/abel@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/abel/-/abel-4.5.0.tgz#f1019c9c22aa813392f84ea2b6baefb48e8aa4cc"
-  integrity sha512-tEpBho/VZWSXB/sEKLSE1TMJA31zz7NbJCbxG0DODptXnRJ1T7WlarB9BMjjN0tApjOv3ZXIyYFucW5Dx4sJ3A==
-
 "@fontsource/abhaya-libre@^4.5.0":
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/@fontsource/abhaya-libre/-/abhaya-libre-4.5.0.tgz#509ce40db1adedba163e9b20c1f66a08a6ef18b7"
   integrity sha512-azz7o7wug5MP8e/e58Ai1AI5XVZUn9SjgnCgeRQzwheZOsvOR33ZKQiv9mH9TFlBhEzjDwnbjm9bQO8qg4TqYA==
 
-"@fontsource/abril-fatface@^4.5.0":
+"@fontsource/actor@^4.5.0":
   version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/abril-fatface/-/abril-fatface-4.5.0.tgz#14db3dbe8325788122b17730740c0982a7173e2a"
-  integrity sha512-x1ZwkW25tB2FnYbdFHzaLI+ef4VYkud+XP4hgh5MbTrLUMJ8j59Wj/Pg6FxprbJw+zCEGZAko257B5ttH+Lccg==
+  resolved "https://registry.yarnpkg.com/@fontsource/actor/-/actor-4.5.0.tgz#91559bd0bddbeae8f952a136860df3b44cacdd76"
+  integrity sha512-GkfabdyqVe1EW+5tO6nGH3tAp7ToNvFh9xp2SeR0G2xmDpYEWSxzeMqWgkiY4PY/ldJsrRz5WUkZMhDqJqjlPQ==
+
+"@fontsource/aileron@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/aileron/-/aileron-4.5.0.tgz#d8c61d300fedfc0848bdb22727b2015c957501bb"
+  integrity sha512-9V2sHy6cW1Z+gu2aGe/soBdJB9EIvwz54zgpmtqiTFuN/OsOx2Dkv/ymuceuzNJwvm3En9ySrb/ev/CoCc3fJA==
 
 "@fontsource/aleo@^4.5.0":
   version "4.5.0"

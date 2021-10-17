@@ -17,5 +17,6 @@ export const sx: ISX = {
 	},
 	body: {
 		maxHeight: "4rem",
+		lineHeight: "1.2rem",
 	},
 };

@@ -16,9 +16,7 @@ export function ArticleCard({ title, body, id, description, date_created, catego
 				<Typography variant="h2">
 					{category}: {title}
 				</Typography>
-				<Typography variant="subtitle1" sx={sx.body}>
-					{description}
-				</Typography>
+				<Typography sx={sx.body}>{description}</Typography>
 			</CardContent>
 		</Card>
 	);

@@ -17,13 +17,13 @@ export function Tabs() {
 
 	if (publicArticles === null) return null;
 	return (
-		<Box sx={{ width: "100%", typography: "body1" }}>
+		<Box sx={{ width: "100%" }}>
 			<TabContext value={value}>
 				<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
 					<TabList onChange={handleChange} aria-label="lab API tabs example">
-						<Tab label="All" value="All" />
+						<Tab label="All" value="All" sx={sx.typography} />
 						{categories.map((category) => {
-							return <Tab label={category} value={category} />;
+							return <Tab label={category} sx={sx.typography} value={category} />;
 						})}
 					</TabList>
 				</Box>

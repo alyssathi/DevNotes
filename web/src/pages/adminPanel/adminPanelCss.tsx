@@ -28,5 +28,6 @@ export const sx: ISX = {
 	},
 	logout: {
 		color: "primary.dark",
+		typography: "subtitle1",
 	},
 };

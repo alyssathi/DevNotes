@@ -18,6 +18,7 @@ export const sx: ISX = {
 		color: "white",
 		fontSize: "1.2rem",
 		textAlign: "center",
+		typography: "subtitle1",
 	},
 	even: {
 		backgroundColor: "primary.light",

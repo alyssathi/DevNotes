@@ -2,24 +2,23 @@ import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import React from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import { useStyles } from "./layoutCss";
+import { sx, useStyles } from "./layoutCss";
 
 function Header(): JSX.Element {
 	const history = useHistory();
-	const css = useStyles();
 	return (
 		<AppBar>
-			<Toolbar className={css.header}>
-				<div onClick={() => history.push("/")} className={css.logo}>
+			<Toolbar sx={sx.header}>
+				<Box onClick={() => history.push("/")} sx={sx.logo}>
 					<Typography color="secondary" variant="h1">
 						DevNotes
 					</Typography>
-				</div>
-				<div>
-					<Button disableRipple color="secondary" onClick={() => history.push("/adminLogin")} variant="outlined" className={css.button}>
+				</Box>
+				<Box>
+					<Button disableRipple color="secondary" onClick={() => history.push("/adminLogin")} sx={sx.typography} variant="outlined">
 						Admin
 					</Button>
-				</div>
+				</Box>
 			</Toolbar>
 		</AppBar>
 	);
@@ -27,16 +26,22 @@ function Header(): JSX.Element {
 function Footer(): JSX.Element {
 	const css = useStyles();
 	return (
-		<Box sx={{ bgcolor: "primary.main", color: "white" }} className={css.footer}>
-			<Typography color="secondary">Copyright Alyssa Thi 2021</Typography>
-			<div className={css.footer_links}>
+		<Box sx={sx.footer}>
+			<Typography color="secondary" variant="subtitle1">
+				Copyright Alyssa Thi 2021
+			</Typography>
+			<Box className={css.footer_links}>
 				<Link className={css.footer_link} to={{ pathname: "https://github.com/alyssathi" }} target="_blank">
-					<Typography color="secondary">Alyssa's Github</Typography>
+					<Typography color="secondary" variant="subtitle1">
+						Alyssa's Github
+					</Typography>
 				</Link>
 				<Link className={css.footer_link} to={{ pathname: "https:alyssathi.dev" }} target="_blank">
-					<Typography color="secondary">Alyssa's Portfolio</Typography>
+					<Typography color="secondary" variant="subtitle1">
+						Alyssa's Portfolio
+					</Typography>
 				</Link>
-			</div>
+			</Box>
 		</Box>
 	);
 }
