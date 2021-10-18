@@ -157,7 +157,7 @@ func (c *Controller) AddCategory(w http.ResponseWriter, r *http.Request) error {
 	if err != nil {
 		return err
 	}
-	json.NewEncoder(w).Encode(http.StatusOK)
+	json.NewEncoder(w).Encode("ok")
 	return nil
 }
 

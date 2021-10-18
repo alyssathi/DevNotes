@@ -8,9 +8,10 @@ interface ISimpleModalProps {
 	buttonName: any;
 	setInputOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 	inputOpen?: boolean;
+	id?: string | null;
 }
 
-export function SimpleModal({ children, buttonName, inputOpen, setInputOpen }: ISimpleModalProps): JSX.Element {
+export function SimpleModal({ id, children, buttonName, inputOpen, setInputOpen }: ISimpleModalProps): JSX.Element {
 	const [open, setOpen] = React.useState<boolean>(false);
 
 	const handleOpen = () => {
@@ -31,7 +32,9 @@ export function SimpleModal({ children, buttonName, inputOpen, setInputOpen }: I
 
 	return (
 		<div>
-			<IconButton onClick={handleOpen}>{buttonName}</IconButton>
+			<IconButton disabled={id !== null} onClick={handleOpen}>
+				{buttonName}
+			</IconButton>
 			<Modal
 				sx={sx.container}
 				open={inputOpen !== undefined ? inputOpen : open}

@@ -1,27 +1,20 @@
-import AddIcon from "@mui/icons-material/Add";
-import { Box, Button, Fab, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { Fab, TextField } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router";
-import { SimpleModal } from "..";
-import { ContextContainer, IArticle } from "../../utils/contextContainer";
+import { IArticle } from "../../utils/contextContainer";
 import { useGetArticle } from "../../utils/useGetArticle";
-import { useGetCategories } from "../../utils/useGetCategories";
+import Category from "./category";
 import { useStyles } from "./markdownInputCss";
 
 export function MarkdownInput() {
-	useGetCategories();
-	const { setCategories, categories } = ContextContainer.useContainer();
 	const css = useStyles();
 	const titleRef = useRef<HTMLInputElement>();
 	const bodyRef = useRef<HTMLInputElement>();
 	const descriptionRef = useRef<HTMLInputElement>();
-	const categoryRef = useRef<HTMLInputElement>();
 	const [isPublished, setIsPublished] = useState<boolean>(false);
 	const [category, setCategory] = useState<string | undefined>("");
 	const history = useHistory();
-	const [inputOpen, setInputOpen] = React.useState<boolean>(false);
 	const [article, setArticle] = useState<IArticle>();
-
 	const queryString = window.location.search;
 	const param = new URLSearchParams(queryString);
 	const id = param.get("id");
@@ -62,43 +55,6 @@ export function MarkdownInput() {
 		}
 	}
 
-	async function handleAddCategory(e: React.FormEvent<HTMLFormElement>) {
-		e.preventDefault();
-
-		if (categoryRef?.current?.value.trim() === "") return;
-
-		try {
-			const response = await fetch("/api/add-category", {
-				method: "POST",
-				headers: { "content-type": "application/json" },
-				body: JSON.stringify({
-					category: categoryRef?.current?.value.trim(),
-				}),
-			});
-			const data = await response.json();
-			if (data === 200) {
-				(async () => {
-					try {
-						const response = await fetch("/api/get-categories", {
-							method: "GET",
-							headers: { "content-type": "application/json" },
-						});
-						const data: [] = await response.json();
-						if (data) {
-							setCategories(data);
-						}
-					} catch (err) {
-						console.error(err);
-					}
-				})();
-			}
-			setCategory(categoryRef?.current?.value.trim());
-			setInputOpen(false);
-		} catch (err) {
-			console.log(err);
-		}
-	}
-
 	if (article?.title === undefined) return null;
 
 	return (
@@ -113,43 +69,7 @@ export function MarkdownInput() {
 				}}
 				inputProps={{ style: { textAlign: "center", fontSize: "1.5rem", fontWeight: "bolder" } }}
 			/>
-			<Box className={css.categoryContainer}>
-				<FormControl>
-					<InputLabel id="category-select-label">Category</InputLabel>
-					<Select
-						required
-						autoWidth
-						sx={{ minWidth: 120 }}
-						labelId="category-select-label"
-						label="Category"
-						value={category}
-						onChange={(e: SelectChangeEvent) => {
-							setCategory(e.target.value);
-						}}
-					>
-						{categories.map((x) => {
-							if (x === null) return null;
-							return <MenuItem value={x.toString()}>{x}</MenuItem>;
-						})}
-					</Select>
-				</FormControl>
-				<SimpleModal setInputOpen={setInputOpen} inputOpen={inputOpen} buttonName={<AddIcon />}>
-					<Box component="form" className={css.form} onSubmit={handleAddCategory}>
-						<TextField
-							color="secondary"
-							required
-							inputRef={categoryRef}
-							label="New Category"
-							InputProps={{
-								className: css.category,
-							}}
-						/>
-						<Button type="submit" variant="contained" color="secondary">
-							Add
-						</Button>
-					</Box>
-				</SimpleModal>
-			</Box>
+			<Category id={id} category={category} setCategory={setCategory} />
 			<TextField
 				InputProps={{
 					className: css.title,
