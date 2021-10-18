@@ -69,7 +69,7 @@ export function MarkdownInput() {
 				}}
 				inputProps={{ style: { textAlign: "center", fontSize: "1.5rem", fontWeight: "bolder" } }}
 			/>
-			<Category id={id} category={category} setCategory={setCategory} />
+			<Category category={category} setCategory={setCategory} />
 			<TextField
 				InputProps={{
 					className: css.title,

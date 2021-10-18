@@ -9,18 +9,16 @@ import AddIcon from "@mui/icons-material/Add";
 interface ICategoryProps {
 	category: string | undefined;
 	setCategory: React.Dispatch<React.SetStateAction<string | undefined>>;
-	id: string | null;
 }
 
-export default function Category({ id, category, setCategory }: ICategoryProps) {
+export default function Category({ category, setCategory }: ICategoryProps) {
 	useGetCategories();
 	const css = useStyles();
 	const { setCategories, categories } = ContextContainer.useContainer();
 	const categoryRef = useRef<HTMLInputElement>();
 	const [inputOpen, setInputOpen] = React.useState<boolean>(false);
 
-	async function handleAddCategory(e: React.FormEvent<HTMLFormElement>) {
-		e.preventDefault();
+	async function handleAddCategory() {
 		if (categoryRef?.current?.value.trim() === "") return;
 
 		try {
@@ -76,8 +74,8 @@ export default function Category({ id, category, setCategory }: ICategoryProps) 
 					})}
 				</Select>
 			</FormControl>
-			<SimpleModal id={id} setInputOpen={setInputOpen} inputOpen={inputOpen} buttonName={<AddIcon />}>
-				<Box component="form" id="category" className={css.form} onSubmit={handleAddCategory}>
+			<SimpleModal setInputOpen={setInputOpen} inputOpen={inputOpen} buttonName={<AddIcon />}>
+				<Box id="category" className={css.form}>
 					<TextField
 						color="secondary"
 						required
@@ -87,7 +85,7 @@ export default function Category({ id, category, setCategory }: ICategoryProps) 
 							className: css.category,
 						}}
 					/>
-					<Button type="submit" form="category" variant="contained" color="secondary">
+					<Button onClick={handleAddCategory} form="category" variant="contained" color="secondary">
 						Add
 					</Button>
 				</Box>
