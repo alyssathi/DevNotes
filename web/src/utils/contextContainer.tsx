@@ -15,7 +15,7 @@ export interface IArticle {
 export type categorytype = string | null;
 
 function ContextDataContainer() {
-	const [loggedIn, setLoggedIn] = useState<boolean>(document.cookie.includes("session"));
+	const [loggedIn, setLoggedIn] = useState<boolean>(document.cookie.includes("dnsid"));
 	const [publicArticles, setPublicArticles] = useState<IArticle[]>([]);
 	const [allArticles, setAllArticles] = useState<IArticle[]>([]);
 	const [categories, setCategories] = useState<categorytype[]>([]);

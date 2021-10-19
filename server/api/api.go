@@ -23,6 +23,7 @@ type Controller struct {
 //initializes our Controller, this is called in the server/cmd main.go file and makes the db, sessions, router and emailer available to all Controller methods in the API package
 func New(db *db.DB) (*Controller, error) {
 	sessionManager := scs.New()
+	sessionManager.Cookie.Name = "dnsid"
 	sessionManager.Store = pgxstore.New(db.Conn)
 	sessionManager.Lifetime = 1000000 * time.Hour
 	sessionManager.Cookie.Persist = true

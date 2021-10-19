@@ -12,5 +12,5 @@ INSERT INTO categories (category)
     VALUES ('React');
 
 INSERT INTO categories (category)
-    VALUES ('Admin');
+    VALUES ('Fullstack');
 
