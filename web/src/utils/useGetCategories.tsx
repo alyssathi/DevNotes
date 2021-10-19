@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { ContextContainer } from "./contextContainer";
 
 export function useGetCategories() {
-	const { categories, setCategories } = ContextContainer.useContainer();
+	const { setCategories } = ContextContainer.useContainer();
 	useEffect(() => {
 		let isMounted = true;
 		(async () => {
@@ -23,5 +23,5 @@ export function useGetCategories() {
 		return () => {
 			isMounted = false;
 		};
-	}, [categories, setCategories]);
+	}, [setCategories]);
 }
